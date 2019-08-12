@@ -1,0 +1,67 @@
+.px2rem(@name, @px) {
+    @{name}: @px * 1px}
+// 鍏冪礌澶栧洿
+.w(@width){.px2rem(width,@width);}
+.h(@height){.px2rem(height,@height);}
+.w-h(@width,@height) {
+  .px2rem(width,@width);
+  .px2rem(height,@height);
+}
+body {line-height: 1;}
+.b-radius(@b-radius){
+.px2rem(border-radius,@b-radius);
+.px2rem(-webkit-border-radius,@b-radius);
+.px2rem(-moz-border-radius,@b-radius);
+}
+// 琛ョ櫧
+.padding(@top,@right,@bottom,@left){
+  .px2rem(padding-top,@top);
+  .px2rem(padding-right,@right);
+  .px2rem(padding-bottom,@bottom);
+  .px2rem(padding-left,@left);
+}
+.pl(@pl){.px2rem(padding-left,@pl);}
+.pr(@pr){.px2rem(padding-right,@pr);}
+.pt(@pt){.px2rem(padding-top,@pt); }
+.pb(@pb){.px2rem(padding-bottom,@pb);}
+
+// 澶栬竟璺�
+.margin(@top,@right,@bottom,@left){
+  .px2rem(margin-top,@top);
+  .px2rem(margin-right,@right);
+  .px2rem(margin-bottom,@bottom);
+  .px2rem(margin-left,@left);
+}
+.ml(@ml){.px2rem(margin-left,@ml);}
+.mr(@mr){.px2rem(margin-right,@mr);}
+.mt(@mt){.px2rem(margin-top,@mt); }
+.mb(@mb){.px2rem(margin-bottom,@mb);}
+
+/*鏂囨湰*/
+.fz(@fz){.px2rem(font-size,@fz);}
+.text(@fz,@color){.px2rem(font-size,@fz); color: @color;}
+.t-left{text-align:left;}.t-center{text-align:center;}.t-right{text-align:right;}
+.d-block{display:block;}
+.d-none{display:none;}
+.d-inline{display:inline;}
+.d-in-block {display:inline-block;}
+.f-weight{ font-weight:bold;}
+.v-middle{vertical-align: middle;}
+.v-top{vertical-align: top;}
+.l-height(@l-height){.px2rem(line-height,@l-height)}
+/*寮规€х洅*/
+.flex{display:flex; display:-webkit-flex;display:-moz-flex;}
+.flex-inline{display: inline-flex; display:-webkit-inline-flex;display:-moz-inline-flex;}
+.flex-between {justify-content:space-between;-webkit-justify-content:space-between;-moz-justify-content:space-between }
+.flex-around {justify-content:space-around;-webkit-justify-content:space-around;-moz-justify-content:space-around;}
+.flex-start{justify-content:flex-start;-webkit-justify-content:flex-start;-moz-justify-content:flex-start;}
+.flex-end{justify-content:flex-end;-webkit-justify-content:flex-end;-moz-justify-content:flex-end;}
+.item-center{align-items:center;-webkit-align-items:center;-moz-align-items:center;}
+.item-end{align-items:flex-end;-webkit-align-items:flex-end;-moz-align-items:flex-end;}
+.flex-center {justify-content:center;-webkit-justify-content:center;-moz-justify-content:center;}
+.flex-wrap{flex-wrap: wrap;-webkit-flex-wrap: wrap;-moz-flex-wrap: wrap;}
+.flex1 {flex:1;-webkit-flex: 1;-moz-flex:1;}
+.flexbetween { .flex; .flex-between;}
+/* 閫氱敤鍙橀噺 */
+@s:solid; @d:dashed;@url:'./img';
+.w100{width:100%;}
