@@ -4,41 +4,62 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 
-const state = {
-    num: 1,
-    str: 'hh',
-    num2: 10,
-    num3: 99,
-    num4: 20
-}
 
-const getters = {
-    num4(state) {
-        return state.num4 += 100;
+
+const modlue1 = {
+    state: {
+        num: 1,
+        str: 'hh',
+        num2: 10,
+        num3: 99,
+        num4: 20
+    },
+    getters: {
+        num4(state) {
+            return state.num4 += 100;
+        }
+    },
+    mutations: {
+        add(state, n) {
+            state.num += n
+        },
+        reduce(state) {
+            state.num--
+        },
+        strs(state) {
+            console.log(0);
+        }
+    },
+    actions: {
+        addAction({ commit }) {
+            // setTimeout(()=>{commit('add',10)},3000);
+            console.log('我比add提前执行');
+            commit('add', 10)
+        },
+        reduceAction({ commit }) {
+            commit('reduce')
+        }
     }
 }
-const mutations = {
-    add(state, n) {
-        state.num += n
+const modlue2 = {
+    state: {
+        number1: 1
     },
-    reduce(state) {
-        state.num--
+    mutations: {
+        add1 (state) {
+            state.number1++
+        }
     },
-    strs(state) {
-        console.log(0);
+    actions: {
+        add1Actions ({commit}) {
+            commit('add1')
+        }
     }
-}
-const actions = {
-    addAction({ commit }) { 
-        commit('add', 10)
-    },
-    reduceAction({ commit }) {
-        commit('reduce')
-    }
+    
 }
 export default new Vuex.Store({
-    state,
-    mutations,
-    getters,
-    actions
+    modules: {
+        first: modlue1,
+        second: modlue2
+    }
 });
