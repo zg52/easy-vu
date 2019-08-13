@@ -4,7 +4,7 @@
     <p>getters {{num4}}</p>
     <button @click="addAction">+</button>
     <button @click="reduceAction">-</button> 
-    <button @click="chag">
+    <button @click="chag">  
       <p>{{change_cont}}</p>
     </button>
 
@@ -17,10 +17,8 @@
 </template>
 
 <script>
-import store from "@/./assets/js/store";
-import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex"
 export default {
-  store,
   data() {
     return {
       change_cont: this.$store.state.first.str //state访问状态对象

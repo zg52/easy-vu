@@ -6,6 +6,7 @@ import lonarui3 from '@/components/lonarui3'
 import lonarui4 from '@/components/lonarui4'
 import Error from '@/components/Error'
 import store from '@/components/store'
+import vueAxios from '@/components/vueAxios'
  
  
 
@@ -25,7 +26,7 @@ export default new Router({
     },
     {
       path:'/lonarui3',
-      name:'lonarui3',
+      name:'lonarui3',  
       component:lonarui3
       
     } 
@@ -53,6 +54,13 @@ export default new Router({
       path:'/store',
       name:'store',
       component:store
+      },
+      // vue-axios
+      {
+        path:'/vueAxios',
+        name:'vueAxios',
+        component:vueAxios
       }
+
   ]
 });

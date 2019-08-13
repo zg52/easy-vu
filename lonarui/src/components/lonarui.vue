@@ -1,8 +1,8 @@
 <style scoped lang="less">
-@import ".././assets/css/public.less";
 .active {color: red;}
 .fade-enter {
   opacity:0;
+ 
 }
 .fade-leave{
   opacity:1;
@@ -14,6 +14,7 @@
   opacity:0;
   transition:opacity .5s;
 }
+
 </style>
 <template>
   <div class="poetry">
@@ -23,6 +24,7 @@
 <div @click="toLonarui4()">通过点击跳转设置$router.push向lonarui4用query传参</div>
  <router-link to="/lonarui4/198/新闻资讯">通过路由配置向lonarui4传参</router-link> 
 <router-link to="/store">去store</router-link>
+<router-link to="/vueAxios">去axios</router-link>
     <div>{{mes}}</div>
     <!-- tab -->
     <ul>

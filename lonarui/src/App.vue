@@ -16,6 +16,3 @@
 // }
 // }
 </script>
-<style lang="less">
-@import 'http://www.xuefu.com/byxf/css/reset.css';
-</style>
