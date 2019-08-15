@@ -1,63 +1,52 @@
 import axios from 'axios'
-import qs from 'qs'
-
-axios.defaults.timeout = 5000;                        //响应时间
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';        //配置请求头
-axios.defaults.baseURL = '';   //配置接口地址
-
-//POST传参序列化(添加请求拦截器)
-axios.interceptors.request.use((config) => {
-    //在发送请求之前做某件事
-    if(config.method  === 'post'){
-        config.data = qs.stringify(config.data);
-    }
-    return config;
-},(error) =>{
-    console.log('错误的传参')
-    return Promise.reject(error);
+import qs from 'qs'//序列化字符串，处理发送请求的参数  axios发送的数据不是json格式，若需要json格式，添加此库
+axios.interceptors.response.use(response => { // 对响应数据做点什么
+  return response.data
+}, function (error) {
+  console.log(error);
+});
+axios.interceptors.request.use(config => { // 对响应错误做点什么
+  return config;
+}, function (error) {
+  return Promise.reject(error)
 });
 
-//返回状态判断(添加响应拦截器)
-axios.interceptors.response.use((res) =>{
-    //对响应数据做些事
-    if(!res.data.success){
-        return Promise.resolve(res);
-    }
-    return res;
-}, (error) => {
-    console.log('网络异常')
-    return Promise.reject(error);
-});
-
-//返回一个Promise(发送post请求)
-export function fetchPost(url, params) {
-    return new Promise((resolve, reject) => {
-        axios.post(url, params)
-            .then(response => {
-                resolve(response);
-            }, err => {
-                reject(err);
-            })
-            .catch((error) => {
-                reject(error)
-            })
-    })
-}
-////返回一个Promise(发送get请求)
-export function fetchGet(url, param) {
-    return new Promise((resolve, reject) => {
-        axios.get(url, {params: param})
-            .then(response => {
-                resolve(response)
-            }, err => {
-                reject(err)
-            })
-            .catch((error) => {
-                reject(error)
-            })
-    })
-}
 export default {
-    fetchPost,
-    fetchGet,
+  // 全局token
+  get(url, params) {
+    return axios({
+      method: 'get',
+      url: url,
+      params,
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      }
+    })
+  },
+  post(url, data) {
+    return axios({
+      method: 'post',
+      url: url,
+      data: qs.stringify(data),
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      }
+    })
+  },
+  form(url, formdata) {
+    return axios({
+      method: 'post',
+      url: url,
+      data: formdata,
+      withCredentials: true,
+    })
+  },
+  getJson(url) {
+    return axios({
+      method: 'get', 
+      url: url
+    })
+  }
 }

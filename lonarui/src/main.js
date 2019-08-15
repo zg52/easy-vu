@@ -6,23 +6,20 @@ import router from './router'
 import axios from 'axios'
 import  vuex  from 'vuex'
 import store from './assets/js/store'
-import http from './assets/js/http'
-
+import http from  './assets/js/http'
 // css
 import './assets/css/reset.css'
 import './assets/css/public.less'
 
 Vue.config.productionTip = false
 Vue.use(vuex)
-
+Vue.prototype.$http = http;//封装的http
 Vue.prototype.$ajax = axios
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   store,
-  http,
   components: { App },
   template: '<App/>'
 })

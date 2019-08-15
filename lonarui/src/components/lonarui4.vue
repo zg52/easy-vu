@@ -20,7 +20,6 @@ export default {
       code: ""
     };
   },
-
   mounted() {
     this.getParmas();
     console.log(this.$route.parmas);
