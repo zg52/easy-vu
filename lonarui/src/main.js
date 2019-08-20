@@ -10,6 +10,7 @@ import http from  './assets/js/http'
 // css
 import './assets/css/reset.css'
 import './assets/css/public.less'
+import './assets/css/header_z.css'
 
 Vue.config.productionTip = false
 Vue.use(vuex)

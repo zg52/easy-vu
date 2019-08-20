@@ -7,15 +7,23 @@ import lonarui4 from '@/components/lonarui4'
 import Error from '@/components/Error'
 import store from '@/components/store'
 import vueAxios from '@/components/vueAxios'
- 
+
+// start
+
+import header from '@/components/public/header'
  
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+        {
+          path:'/',
+          name: 'header',
+          component: header,
+        },
     {
-      path: '/',
+      path: '/lonarui',
       name: 'lonarui',
       component: lonarui,
       children :[

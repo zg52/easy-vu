@@ -22,8 +22,12 @@ img {
         </li>
       </ul>
     </ul>
-   <label><input type="text" name="name" id="name" placeholder="请输入您的姓名"></label>
-                <label><input type="tel" name="mobile" id="mobile" placeholder="请输入您的电话号码"></label>
+    <label>
+      <input type="text" name="name" id="name" placeholder="请输入您的姓名" />
+    </label>
+    <label>
+      <input type="tel" name="mobile" id="mobile" placeholder="请输入您的电话号码" />
+    </label>
   </div>
 </template>
 <script>
@@ -69,22 +73,22 @@ export default {
       }
     };
   },
-  methods: {
-   
-     
-  },
+  methods: {},
   mounted() {
     // axios封装
-this.$http.post(
-   'http://www.xuefu.com/data/student',
-   {
-     name:'this is http axios',
-   }
-  ).then(res => {
-    console.log(res);
-}).catch((res) => {
-  console.log(res);
-})
+    this.$http
+      .post(
+        "api/data/student", //代理跨域 只适用于开发环境
+        {
+          name: "this is http axios"
+        }
+      )
+      .then(res => {
+        console.log(res);
+      })
+      .catch(res => {
+        console.log(res);
+      });
     let _this = this;
     this.$nextTick(() => {
       getUser();
@@ -94,7 +98,7 @@ this.$http.post(
           console.log(response);
         } catch (error) {
           console.error(error);
-        }  
+        }
       }
     });
     //
@@ -107,16 +111,14 @@ this.$http.post(
     function get3() {
       return _this.$ajax.get("http://www.wujiaweb.com/api/cart");
     }
-    _this.$ajax.all([get1(), get2(), get3()]).then( 
+    _this.$ajax.all([get1(), get2(), get3()]).then(
       _this.$ajax.spread(function(data1, data2, data3) {
         let a = data1.data.filter(val => {
           return val.ad_id > 70;
         });
-        console.log(a); 
-        
+        console.log(a);
       })
     );
   }
 };
-
 </script>
