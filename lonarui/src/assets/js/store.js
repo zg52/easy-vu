@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 Vue.use(Vuex);
- 
+
 const modlue1 = {
     state: {
         num: 1,
@@ -52,9 +52,20 @@ const modlue2 = {
         }
     }
 }
+
+//new
+const modlue3 = {
+	state: {
+		URL: 'http://www.xuefu.com/byxf/data/image/'
+	},
+	// mutations: {
+	//
+	// }
+}
 export default new Vuex.Store({
     modules: {
         first: modlue1,
-        second: modlue2
+        second: modlue2,
+		    third: modlue3
     }
 });

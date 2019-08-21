@@ -1,9 +1,10 @@
 <template>
   <div id="app">
-    <router-view/>
- <router-view name="left" style="float:left;width:50%;background-color:#ccc;height:300px;"></router-view>
+	  <head_first></head_first>
  <router-view name="right" style="float:right;width:50%;background-color:#c0c;height:300px;"></router-view>
-  </div>
+ <router-view name="left" style="float:left;width:50%;background-color:#ccc;height:300px;"></router-view>
+ <router-view/>
+  </div>    
 </template>
 <script>
 // export default {
@@ -15,4 +16,10 @@
 //   }
 // }
 // }
+import head_first from './components/public/head_first.vue'
+export default {
+	components:{
+		head_first
+	}
+}
 </script>

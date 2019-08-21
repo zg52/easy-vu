@@ -1,0 +1,11 @@
+{
+  "loginList": ["考研政策","招生院校","招生目录","成绩查询","考研流程","现场确认","院校排名","考研资讯"],
+  "cardList": [ 
+    { "tit": "报录比", "ziXun": "快速了解", "cradImg": "index-card1.png" },
+    { "tit": "分数线", "ziXun": "快速了解", "cradImg": "index-card2.png" },
+    { "tit": "报考条件", "ziXun": "快速了解", "cradImg": "index-card3.png" },
+    { "tit": "招生简章", "ziXun": "快速了解", "cradImg": "index-card4.png" },
+    { "tit": "考试大纲", "ziXun": "快速了解", "cradImg": "index-card5.png" },
+    { "tit": "报考条件", "ziXun": "快速了解", "cradImg": "index-card6.png" }
+     ]
+}

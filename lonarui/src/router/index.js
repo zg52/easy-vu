@@ -10,7 +10,8 @@ import vueAxios from '@/components/vueAxios'
 
 // start
 
-import header from '@/components/public/header'
+// import head_first from '@/components/public/head_first'
+import index from '@/components/index'
  
 
 Vue.use(Router)
@@ -19,8 +20,8 @@ export default new Router({
   routes: [
         {
           path:'/',
-          name: 'header',
-          component: header,
+          name: 'index',
+          component: index,
         },
     {
       path: '/lonarui',

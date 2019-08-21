@@ -1,4 +1,4 @@
-<style>
+<style scoped="less">
 img {
   width: 30px;
 }
