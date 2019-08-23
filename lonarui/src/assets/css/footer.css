@@ -1,0 +1,148 @@
+footer .footer-nav {
+    padding-bottom: 38px;
+    width: 1200px;
+    margin: 0 auto;
+    border-top: 1px #ededed solid;
+      padding-top: 48px;
+      margin-top:50px;
+  }
+  footer .footer-nav .footer-nav-l {
+    width: 770px;margin-left: 30px;
+  }
+  footer .footer-nav .footer-nav-l > div {
+    width: 152px;
+    background: url('../image/footer-index-line.png') no-repeat right top;
+  }
+  footer .footer-nav .footer-nav-l > div h3 {
+    font-size: 18px;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  footer .footer-nav .footer-nav-l > div li {
+    margin-bottom: 16px;
+  }
+  footer .footer-nav .footer-nav-l > div li a {
+    color: #666666;
+    display: block;
+  }
+  footer .footer-nav .footer-nav-l > div:last-child {
+    background: initial;
+    width: 75px;
+  }
+  footer .footer-nav .gywm {
+    color: #333333;    margin-right: 37px
+  }
+  footer .footer-nav .gywm h3 {
+    font-size: 18px;
+    padding-left: 30px;
+    margin-bottom: 20px;
+  }
+  footer .footer-nav .gywm a {
+    color: #666666;
+    font-size: 12px;
+    display: block;
+    padding-left: 30px;
+    position: relative;
+  }
+  footer .footer-nav .gywm a img {
+      position: absolute;
+      top: -38px;
+      right: 85px;
+    display: none;
+  }
+  
+  footer .footer-nav .gywm a:hover img {
+  
+  }
+  footer .footer-nav .gywm a:hover img {
+    display: block;
+  }
+  footer .footer-nav .gywm .icon-weixin + img {
+    top: -39px!important;
+  }
+  footer .footer-nav .gywm a i {
+    vertical-align: middle;
+    padding-right: 5px;
+  }
+  footer .footer-nav .phone {
+    margin-top: 38px;
+  }
+  footer .footer-nav .phone span {
+    display: block;
+    margin-bottom: 9px;
+    text-align: right;
+  }
+  footer .footer-nav .phone strong {
+    font-family: Impact;
+    font-size: 20px;
+    color: #e92930;
+  }
+  footer .footer {
+    width: 100%;
+    padding-bottom: 30px;
+    background: #262626;
+    text-align: center;
+  }
+  footer .footer .diqu {
+    text-align: left;
+    padding-top: 30px;
+  }
+  footer .footer .diqu .diqu-list {
+    width: 635px;
+  }
+  footer .footer .diqu .diqu-list .hd {
+    font-size: 0px;
+  }
+  footer .footer .diqu .diqu-list .hd h3 {
+    display: inline-block;
+    margin-right: 50px;
+    text-align: center;
+    cursor: pointer;
+  }
+  footer .footer .diqu .diqu-list .hd h3 em {
+    color: #BFBFBF;
+    font-size: 16px;
+    display: block;
+  }
+  footer .footer .diqu .diqu-list .hd h3:last-child {
+    margin-right: 0px;
+  }
+  footer .footer .diqu .diqu-list .hd h3 i {
+    width: 20px;
+    height: 2px;
+    background-color: #e92930;
+    display: inline-block;
+    visibility: hidden;
+    margin-top: 9px;
+  }
+  footer .footer .diqu .diqu-list .hd h3.on em {
+    color: #e92930;
+  }
+  footer .footer .diqu .diqu-list .hd h3.on i {
+    visibility: visible;
+  }
+  footer .footer .diqu ul {
+    margin-top: 30px;
+  }
+  footer .footer .diqu li a {
+    color: #666;
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 10px;
+  }
+  footer .footer .diqu a:last-child {
+    margin-right: 0px !important;
+  }
+  footer .footer .addres {
+    margin-top: 59px;
+  }
+  footer .footer .addres p {
+    color: #666666;
+  }
+  footer .footer .addres p:first-child {
+    margin-bottom: 14px;
+  }
+  footer .footer .footer-logo {
+    margin-top: 18px;
+    /* margin-right: 56px; */
+  }
