@@ -68,7 +68,8 @@
                   <p>欢迎来到学府考研！</p>
                 </div>
                 <div class="loging pt20">
-                  <button>登录</button>
+
+                  <router-link to="/login" :style="colors" v-show="loginShow"> <button>登录</button></router-link>
                   <br />
                   <button>注册有礼</button>
                 </div>
@@ -234,6 +235,7 @@ export default {
   name: "index",
   data() {
     return {
+      loginShow: true,
       dataUrl: this.$store.state.third.URL,
       // 导航标题
       navs: Object.freeze([
@@ -315,10 +317,14 @@ export default {
       // main start
       cards: [],
       headlines: [], //头条
-      wxLists: [], //网校列表
+      wxLists: [], //网校列表C
       wxListImgs: [],
       leftSlides: [],
-      kcLists: []
+      kcLists: [],
+      // style
+      colors: {
+        color:'#fff'
+      }
     };
   },
   methods: {
@@ -328,6 +334,8 @@ export default {
   },
   mounted() {
     const _this = this;
+    // 判断是否登陆
+
     this.$nextTick(function() {
       _this.$http
         .getJson("api/byxf/data/pageData2")
@@ -371,5 +379,5 @@ export default {
         })
     })
   }
-} 
+}
 </script>

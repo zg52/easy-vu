@@ -7,12 +7,14 @@ import lonarui4 from '@/components/lonarui4'
 import Error from '@/components/Error'
 import store from '@/components/store'
 import vueAxios from '@/components/vueAxios'
+import login from '@/components/login'
+import list from '@/components/list'
 
 // start
 
 // import head_first from '@/components/public/head_first'
 import index from '@/components/index'
- 
+
 
 Vue.use(Router)
 
@@ -30,15 +32,15 @@ export default new Router({
       children :[
         {
       path: '/lonarui2',
-      name: 'lonarui2', 
+      name: 'lonarui2',
       component: lonarui2
     },
     {
       path:'/lonarui3',
-      name:'lonarui3',  
+      name:'lonarui3',
       component:lonarui3
-      
-    } 
+
+    }
   ]
     },
     {
@@ -53,11 +55,11 @@ export default new Router({
       }
     },
 
-// 404页面
-    {
+
+    {// 404页面
       path:'*',
       name:'Error',
-      component:Error  
+      component:Error
     },
     {
       path:'/store',
@@ -69,7 +71,16 @@ export default new Router({
         path:'/vueAxios',
         name:'vueAxios',
         component:vueAxios
+      },
+      {
+        path:'/login',
+        name:'login',
+        component:login
+      },
+      {
+        path:'/list',
+        name:'list',
+        component:list
       }
-
   ]
-});
+})
