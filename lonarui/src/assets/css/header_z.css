@@ -500,3 +500,7 @@ color: #e92930;
 .news-1 > div:nth-child(3) i {
   font-size: 47px;
 }
+
+header {
+  display: none;
+}

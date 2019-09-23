@@ -21,7 +21,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
         {
-          path:'/',
+          path:'/index',
           name: 'index',
           component: index,
         },
@@ -73,7 +73,7 @@ export default new Router({
         component:vueAxios
       },
       {
-        path:'/login',
+        path:'/',
         name:'login',
         component:login
       },
