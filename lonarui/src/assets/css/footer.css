@@ -146,3 +146,4 @@ footer .footer-nav {
     margin-top: 18px;
     /* margin-right: 56px; */
   }
+  footer {display: none;}

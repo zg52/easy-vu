@@ -7,7 +7,8 @@ import axios from 'axios'
 import  vuex  from 'vuex'
 import store from './assets/js/store'
 import http from  './assets/js/http' //全局axios -->$http
-import Mock from './mock/mock'
+import Mock from './mock/mock'//全局模拟数据
+import eventUntil from './assets/js/eventUntil' //全局事件侦听工具
 // css
 
 import './assets/css/iconfont.css'   //全局icon
@@ -22,7 +23,8 @@ Vue.config.productionTip = false
  
 Vue.use(vuex)
 Vue.prototype.$http = http;//封装的http
-Vue.prototype.$ajax = axios
+Vue.prototype.$ajax = axios;
+Vue.prototype.$eventUntil = eventUntil; //在vu原型上(全局)启用事件侦听器工具
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
