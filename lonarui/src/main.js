@@ -9,8 +9,10 @@ import store from './assets/js/store'
 import http from  './assets/js/http' //全局axios -->$http
 import Mock from './mock/mock'//全局模拟数据
 import eventUntil from './assets/js/eventUntil' //全局事件侦听工具
-// css
+import ElementUI from 'element-ui';
 
+// css
+import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/iconfont.css'   //全局icon
 import './assets/css/reset.css'   //全局reset
 // import './assets/css/public.less' //全局less
@@ -20,7 +22,7 @@ import './assets/css/footer.css'//页底css
 import './assets/css/index_z.css' //非首页公用css
 
 Vue.config.productionTip = false
- 
+Vue.use(ElementUI);
 Vue.use(vuex)
 Vue.prototype.$http = http;//封装的http
 Vue.prototype.$ajax = axios;
