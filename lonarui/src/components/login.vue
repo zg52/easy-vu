@@ -157,7 +157,7 @@ export default {
       class regHandler {
         log_on_message() {
           //跳转注册块
-          var log_on_target = _this.$refs.register;
+          let log_on_target = _this.$refs.register;
           _this.$eventUntil.addEvent(log_on_target,"click", clickRegPath);
           function clickRegPath(e) {
             _this.loginStatus = false;
@@ -166,7 +166,7 @@ export default {
         }
 
         registration() {
-          var registration_target = _this.$refs.succeesRegister;
+          let registration_target = _this.$refs.succeesRegister;
            _this.$eventUntil.addEvent(registration_target,'click',clickSucceesReg);
           function clickSucceesReg(e) {
              e.preventDefault();
@@ -174,7 +174,7 @@ export default {
           }
         }
       }
-      var regHandler_fun = new regHandler();
+      let regHandler_fun = new regHandler();
       regHandler_fun.log_on_message();
       regHandler_fun.registration();
     });
@@ -186,7 +186,7 @@ export default {
     _this.$eventUntil.removeEvent(element,'click',Handler);
       }
     }
-    var removeHandler =  new removeEventes();
+    let removeHandler =  new removeEventes();
         removeHandler.removGather(this.$refs.register,clickRegPath);
          removeHandler.removGather(this.$refs.register,clickSucceesReg);
   }
