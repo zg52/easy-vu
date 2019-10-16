@@ -39,7 +39,7 @@ button {
   border-radius: 4px;
 }
 button.disable {
-  cursor:not-allowed;
+  cursor: not-allowed;
 }
 .register {
   margin-top: 20px;
@@ -67,60 +67,95 @@ button.disable {
 
 <template>
   <div>
+    <!-- 登录 -->
     <form class="form login" name="login" v-show="loginStatus">
       <label>
         <span>姓名：</span>
-        <input type="text"
-                v-model="loginUsername" 
-                :placeholder="loginUsernameTIp" 
-                @keyup="loginUsername = loginUsername.replace(/\s+/g, '')"
-                 @click="loginUsernameTIp = ''"
-                 @mouseleave.prevent = "loginUsernameTIp = '请输入您的姓名'"
-                  maxlength="6" />
+        <input
+          type="text"
+          v-model="loginUsername"
+          :placeholder="loginUsernameTIp"
+          @keyup="loginUsername = loginUsername.replace(/\s+/g, '')"
+          @click="loginUsernameTIp = ''"
+          @mouseleave.prevent="loginUsernameTIp = '请输入您的姓名'"
+          maxlength="6"
+        />
       </label>
       <label>
         <span>密码：</span>
-        <input type="password" 
-               v-model="loginPassword"
-               :placeholder="loginPasswordTIp" 
-                @keyup="loginPassword = loginPassword.replace(/\s+/g, '')"
-                @click="loginPasswordTIp = ''"
-                @mouseleave.prevent = "loginPasswordTIp = '请输入您的密码'"
-                 maxlength="12" />
+        <input
+          type="password"
+          v-model="loginPassword"
+          :placeholder="loginPasswordTIp"
+          @keyup="loginPassword = loginPassword.replace(/\s+/g, '')"
+          @click="loginPasswordTIp = ''"
+          @mouseleave.prevent="loginPasswordTIp = '请输入您的密码'"
+          maxlength="12"
+        />
       </label>
-      <button
-       @click.prevent="ringUp" 
-       :class="{'login':true,'disable':cursors}" 
-       ref="loginTxtTip">登录</button>
+      <button @click.prevent="ringUp" :class="{'login':true,'disable':cursors}" ref="loginTxtTip">登录</button>
       <div class="msgHandler">
         <span>忘记密码？点击找回</span>
         <span ref="register" class="register">还没账号？去注册</span>
       </div>
     </form>
-    <form class="form register" v-show="registerStatus">
+<!-- 注册 -->
+    <form class="form registerNpt" v-show="registerStatus">
       <label>
         <span>姓名：</span>
-        <input type="text" />
+        <input type="text" name="registerName" placeholder="请输入您的姓名" v-model="registerName" />
       </label>
       <label>
         <span>手机号：</span>
-        <input type="text" />
+        <input type="text" name="registerMobile" placeholder="请输入您的手机号" v-model="registerMobile" />
       </label>
       <label>
         <span>密码：&nbsp;&nbsp;&nbsp;</span>
-        <input type="text" maxlength="12" />
+        <input
+          type="password"
+          name="registerPassword"
+          placeholder="请输入密码"
+          v-model="registerPassword"
+          maxlength="12"
+        />
       </label>
       <label>
         <span>确认密码：</span>
-        <input type="text" maxlength="12" />
+        <input
+          type="password"
+          name="verifyRegisterPassword"
+          placeholder="请再次输入密码"
+          v-model="verifyRegisterPassword"
+          maxlength="12"
+        />
       </label>
       <button ref="succeesRegister">立即注册</button>
     </form>
-<!-- 弹出信息提示 -->
-<div>
-    <!-- <el-button >成功</el-button> -->
+    <!-- 找回密码 -->
+    <!-- <form class="form retrievePassword" v-show="retrievePassword">
+      <label>
+        <span>姓名：</span>
+        <input type="text" name="registerName" placeholder="请输入您的姓名" v-model="registerName" />
+      </label>
+      <label>
+        <span>手机号：</span>
+        <input type="text" name="registerMobile" placeholder="请输入您的手机号" v-model="registerMobile" />
+      </label>
  
-</div>
+      <label>
+        <span>确认密码：</span>
+        <input
+          type="password"
+          name="verifyRegisterPassword"
+          placeholder="请再次输入密码"
+          v-model="verifyRegisterPassword"
+          maxlength="12"
+        />
+      </label>
+      <button ref="succeesRegister">立即注册</button>
+    </form>   -->
+    <div>
+    </div>
   </div>
 </template>
 <script>
@@ -128,71 +163,93 @@ export default {
   data() {
     return {
       loginStatus: true, //默认展示登录表单
-      registerStatus: true,//默认展示注册表单
+      registerStatus: false, //默认展示注册表单
+      retrievePassword: false,//找回密码
       // 表单字段验证
+
+      nameReg: /^[\u4E00-\u9FA5]{1,6}$/g, //登录名/注册名验证
+      mobileReg: /^1[34578]\d{9}$/g, //手机号验证
+      passwordReg: /^[0-9]*$/, //密码验证
+
       // 登录
-      loginUsername: "",//登录名
-      loginUsernameTIp: "请输入您的姓名",//登录名提示
-      loginPassword: "",//登录密码
-      loginPasswordTIp: "请输入您的密码",//登录密码提示
-      clickLoginTip:'用户名或密码错误',
-      nameReg: /^[\u4E00-\u9FA5]{1,6}$/,//登录名/注册名验证
+      loginUsername: "", //登录名
+      loginUsernameTIp: "请输入您的姓名", //登录名提示
+      loginPassword: "", //登录密码
+      loginPasswordTIp: "请输入您的密码", //登录密码提示
+
       loging: "正在登陆中...",
-      cursors:false,// 按钮是否可点击
+      cursors: false, // 按钮是否可点击
 
       // 注册
-      registerNamePassword: "用户名或密码不对"
+      registerName: "",
+      registerMobile: "",
+      registerPassword: "",
+      verifyRegisterPassword: "",
+
+      // 注册各项提示
+      registerNptTip: [
+        "请输入您的姓名",
+        "请输入您的手机号",
+        "请输入密码",
+        "请再次输入密码"
+      ],
+      informationTip(nameMsg, nameType) {
+        //启用elementUi 信息提示功能
+        this.$message({
+          message: nameMsg,
+          type: nameType
+        });
+      }
     };
   },
   methods: {
-    ringUp(e) {
+    // 登录
+    ringUp() {
       const _this = this;
-      !_this.nameReg.test(_this.loginUsername) ? 
-      informationTip('请输入正确的姓名','warning') : 
-      setMes();
-      function setMes() {
+      !_this.nameReg.test(_this.loginUsername)
+        ? _this.informationTip("请输入正确的姓名", "warning")
+        : setMes();
 
+      function setMes() {
         _this.$http.get("http://www.zg.com").then(res => {
-          let idMsg = {  //输出数据库用户登录信息
-            idName() {
-              return res.login.map((val,index) => {
-              return val.name
-            })
-            },
-            idPassword() {
-              return res.login.map((val,index) => {
-              return val.password
-            })
-            },
-            ids() {
-              return res.login.map((val,index) => {
-              return val.id
-            })
-            },
-          }
-             !(idMsg.idName()).includes(_this.loginUsername) ? 
-            informationTip('该用户不存在，请先注册','warning') : 
-           !(idMsg.idPassword()).includes(_this.loginPassword) ? 
-            informationTip('请输入正确密码','warning') : loginSuccees()
-          }).catch(err => {
-            console.log(err);
+            let idMsg = {
+              //输出数据库用户登录信息
+              idName() {
+                return res.login.map((val, index) => {
+                  return val.name;
+                });
+              },
+              idPassword() {
+                return res.login.map((val, index) => {
+                  return val.password;
+                });
+              },
+              ids() {
+                return res.login.map((val, index) => {
+                  return val.id;
+                });
+              }
+            };
+            !idMsg.idName().includes(_this.loginUsername)
+              ? _this.informationTip("该用户不存在，请先注册", "warning")
+              : !idMsg.idPassword().includes(_this.loginPassword)
+              ? _this.informationTip("请输入正确密码", "warning")
+              : loginSuccees();
           })
+          .catch(err => {
+            console.log(err);
+          });
       }
-        function informationTip (nameMsg,nameType) {//启用elementUi 信息提示功能
-          _this.$message({
-          message: nameMsg,
-          type: nameType
-        })
-       }
-        function loginSuccees () {
+
+      function loginSuccees() {
         window.localStorage.setItem("name", _this.loginUsername);
-        
-        let loginBtnTxt = _this.$refs.loginTxtTip;  
-            loginBtnTxt.innerHTML = _this.loging;
-            loginBtnTxt.innerHTML === _this.loging ? 
-            _this.cursors = true :   //登录成功，禁用登录按钮点击
-            _this.cursors = false;
-          setTimeout(() => {
+
+        let loginBtnTxt = _this.$refs.loginTxtTip;
+        loginBtnTxt.innerHTML = _this.loging;
+        loginBtnTxt.innerHTML === _this.loging
+          ? (_this.cursors = true) //登录成功，禁用登录按钮点击
+          : (_this.cursors = false);
+        setTimeout(() => {
           _this.$router.push({
             name: "index",
             query: {
@@ -200,42 +257,111 @@ export default {
               name: _this.loginUsername
             }
           });
-        }, 2000)
-        }
+        }, 2000);
+      }
     },
-     open2() { 
-     }
+    open2() {}
   },
   mounted() {
     const _this = this;
     this.$nextTick(() => {
       class regHandler {
         log_on_message() {
-          //跳转注册块
+          //展示注册表单
           let log_on_target = _this.$refs.register;
           _this.$eventUntil.addEvent(log_on_target, "click", clickRegPath);
           function clickRegPath(e) {
-            _this.loginStatus = false;
+            (_this.loginStatus = false,_this.registerStatus = true);
             e.preventDefault();
           }
         }
+        // 验证及表单注册
         registration() {
           let registration_target = _this.$refs.succeesRegister;
+          let registerNpt = document.querySelector(".registerNpt").getElementsByTagName("input");
+
+          //  控制表单输入及提示信息
+          Array.from(registerNpt).map((val, index) => {
+            nptTip("keyup", nptAcg); // 键入表单去空格
+            nptTip("click", nptRmoveTip); // 键入表单去除提示
+            nptTip("mouseleave", addNptTip); // 键入表单去除提示
+            function nptTip(eType) {
+              _this.$eventUntil.addEvent(val, eType, nptAcg);
+            }
+            function nptAcg() {
+              this.value = this.value.replace(/\s+/g, "");
+            }
+            function nptRmoveTip() {
+              this.placeholder = "";
+            }
+            function addNptTip() {
+              this.placeholder = _this.registerNptTip[index];
+            }
+          }); 
+          // 点击注册按钮验证
+
+          var registerHandler = {
+            clickSucceesReg(e) {
+              //  首先判断用户是否已存在数据库中
+               function userStore () {
+                 _this.$http.get("http://www.zg.com").then(res => {
+                res.login.find((val, index) => {
+                 _this.registerMobile === val.mobile ?
+                  (console.log(val.mobile),_this.informationTip( "该用户已注册，请直接登录！", "warning" ),
+                  _this.loginStatus = true,
+                  _this.registerStatus = false)
+                : String;
+                });
+                return;
+               }).catch(error => {
+                 console.log(error);
+               });
+               }
+              startReg();
+             
+              function startReg() {
+                !_this.registerName.match(_this.nameReg) ?
+                 _this.informationTip("请输入正确的姓名", "warning") : 
+                 !_this.registerMobile.match(_this.mobileReg) ? 
+                 (_this.informationTip("请输入正确的手机号", "warning")) : 
+                //  userStore();
+                 !_this.registerPassword.match(_this.passwordReg) &&
+                  _this.registerPassword.length > 4 ? 
+                  ( _this.informationTip( "请输入12位数以内的数字密码", "warning"),
+                    _this.verifyRegisterPassword = '') : 
+                    _this.registerPassword !== _this.verifyRegisterPassword ? 
+                    (_this.informationTip("两次输入的密码不一致，请重新输入！","warning"),
+                    _this.verifyRegisterPassword = ''
+                    ) : (window.localStorage.setItem(
+                      "mobile",
+                      _this.registerMobile
+                    ),
+                    _this.informationTip("注册成功！请登录！", "success"), //弹出注册成功时，展示登录表单，隐藏注册表单
+                    setTimeout(() => {
+                      _this.loginStatus = true,
+                    _this.registerStatus = false
+                    },2000)
+                    );
+              }
+              e.preventDefault();
+            }
+          };
           _this.$eventUntil.addEvent(
             registration_target,
             "click",
-            clickSucceesReg
+            registerHandler.clickSucceesReg
           );
-          function clickSucceesReg(e) {
-            e.preventDefault();
-            alert(0);
-          }
+        }
+        // 找回密码
+        retrieve_password () {
+
         }
       }
-
+// 
       let regHandler_fun = new regHandler();
-      regHandler_fun.log_on_message();
-      regHandler_fun.registration();
+      regHandler_fun.log_on_message(); //展示注册表单
+      regHandler_fun.registration(); //注册验证
+      regHandler_fun.retrieve_password();//找回密码
     });
   },
   beforeDestroy() {
@@ -251,3 +377,4 @@ export default {
   }
 }
 </script>
+
