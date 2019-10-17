@@ -235,12 +235,10 @@ export default {
               : !idMsg.idPassword().includes(_this.loginPassword)
               ? _this.informationTip("请输入正确密码", "warning")
               : loginSuccees();
-          })
-          .catch(err => {
+          }).catch(err => {
             console.log(err);
           });
-      }
-
+      } 
       function loginSuccees() {
         window.localStorage.setItem("name", _this.loginUsername);
 
@@ -257,7 +255,7 @@ export default {
               name: _this.loginUsername
             }
           });
-        }, 2000);
+        }, 2000); 
       }
     },
     open2() {}
@@ -351,10 +349,9 @@ export default {
             "click",
             registerHandler.clickSucceesReg
           );
-        }
+        } 
         // 找回密码
         retrieve_password () {
-
         }
       }
 // 
