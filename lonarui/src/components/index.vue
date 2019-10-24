@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
     <section>
       <div class="main">
@@ -7,8 +7,7 @@
             <div class="all-course">全部课程分类</div>
             <div class="nav">
               <nav>
-                <a
-                  v-for="(nav,index) of navs"
+                <a v-for="(nav,index) of navs"
                   :key="nav.id"
                   :href="nav.href"
                   :title="nav.tit"
