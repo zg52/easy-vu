@@ -8,7 +8,7 @@ import Error from '@/components/Error'
 import store from '@/components/store'
 import vueAxios from '@/components/vueAxios'
 import login from '@/components/login'
-import list from '@/components/list'
+import listDetails from '@/components/listDetails'
 
 // start
 
@@ -73,14 +73,14 @@ export default new Router({
         component:vueAxios
       },
       {
-        path:'/',
+        path:'/login',
         name:'login',
         component:login
       },
       {
-        path:'/list',
-        name:'list',
-        component:list
+        path:'/',
+        name:'listDetails',
+        component:listDetails
       }
   ]
 })
