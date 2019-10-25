@@ -218,6 +218,7 @@ export default {
         _this.$http
           .get("http://www.zg.com")
           .then(res => {
+            console.log(res);
             let idMsg = {
               //输出数据库用户登录信息
               idName() {
