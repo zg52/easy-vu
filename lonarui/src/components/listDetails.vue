@@ -5,8 +5,12 @@
   font-size: 20px;
   font-weight: bold;
 }
-h2 {text-align: left;}
-.listDetails {.t-center;}
+h2 {
+  text-align: left;
+}
+.listDetails {
+  .t-center;
+}
 .listDetails li {
   line-height: 30px;
   font-size: 14px;
@@ -27,7 +31,7 @@ h2 {text-align: left;}
   padding-right: 30px;
   .pl(10);
 }
- 
+
 .listDetails li {
   span:last-child {
     border-right: none;
@@ -35,20 +39,63 @@ h2 {text-align: left;}
 }
 .listDetails ul {
   .mt(20);
+  position: relative;
 }
-.paginations  {
+.paginations {
   .mt(30);
+}
+.listDetails ul i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  transition: all 0.4s;
+  display: block;
+}
+.listDetails ul i.active {
+  background-color: hsla(0, 0%, 100%, 0.9);
+}
+.listDetails ul em {
+  .w-h(36, 36);
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  background-color: skyblue;
+  -webkit-animation: ani-spin-bounce 1s 0s ease-in-out infinite;
+  animation: ani-spin-bounce 1s 0s ease-in-out infinite;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  opacity: 0;
+}
+.listDetails ul em.active {
+  opacity: 1;
+}
+@keyframes ani-spin-bounce {
+  0% {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 }
 </style>
 
 <!--单独更爱ele-ui组件样式-->
 <style lang="less">
 .el-pager li.active {
-  background: skyblue!important;
+  background: skyblue !important;
 }
- .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
-   color: #333;
- }
+.el-pagination.is-background .btn-next,
+.el-pagination.is-background .btn-prev,
+.el-pagination.is-background .el-pager li {
+  color: #333;
+}
 </style>
 <template>
   <div class="listDetails mt30">
@@ -63,14 +110,16 @@ h2 {text-align: left;}
             <span>证件号码：{{ site.idCard }}</span>
             <span>住址：{{ site.address }}</span>
           </li>
+          <i :class="{active:isActive}"></i>
+          <em :class="{active:isActive}"></em>
         </ul>
-        <el-pagination 
-        @size-change="handleSizeChange"
-        class="paginations"
-         @current-change="handleCurrentChange"
-        :background = "bg"
-        :page-size="page_size"
-        :total="page_num"
+        <el-pagination
+          @size-change="handleSizeChange"
+          class="paginations"
+          @current-change="handleCurrentChange"
+          :background="bg"
+          :page-size="page_size"
+          :total="page_num"
         ></el-pagination>
       </div>
     </div>
@@ -82,76 +131,81 @@ export default {
   name: "listDetails",
   data() {
     return {
-      bg:true,//分页背景色值
-      sites: [],//列表
-      page_num: 50,  //页条50
-      page_size: 10,//每页展示10条数据
-      pageSliceNum:[],//开始截取数据位置
-      page_index:Number,//页码数
+      bg: true, //分页背景色值
+      sites: [], //列表
+      page_num: 50, //页条50
+      page_size: 10, //每页展示10条数据
+      pageSliceNum: [], //开始截取数据位置
+      page_index: Number, //页码数
+      isActive: false, //加载中提示
 
-     addNumHalder () {
-        var page_index = (this.page_num / this.page_size); 
+      addNumHalder() {
+        var page_index = this.page_num / this.page_size;
         this.page_index = page_index;
         var pagesShow = [];
-         Array.from({length:this.page_index}).map((item,i) => {
-                 pagesShow.push(parseInt((i + 1) + '0'));
-         })
-           this.pageSliceNum = [0].concat(pagesShow);
-         }
+        Array.from({ length: this.page_index }).map((item, i) => {
+          pagesShow.push(parseInt(i + 1 + "0"));
+        });
+        this.pageSliceNum = [0].concat(pagesShow);
+      }
     }
   },
   methods: {
-        handleSizeChange(val) {
-      },
-      handleCurrentChange(val) {
-        this.$http.get('http://www.zg.com').then(res => {
-           this.sites = [];
-           res.pages.forEach(val => {
-            this.sites.push(
-              {
-                  id: val.id,
-                name: val.name,
-                mobile: val.mobile,
-                idCard: val.idCard,
-                address: val.address
-              }
-            )
+    handleSizeChange(val) {},
+    handleCurrentChange(val) {
+      this.$http.get("http://www.zg.com").then(res => {
+        this.sites = [];
+        res.pages.forEach(val => {
+          this.sites.push({
+            id: val.id,
+            name: val.name,
+            mobile: val.mobile,
+            idCard: val.idCard,
+            address: val.address
           });
-          // 页码 
-          setTimeout( () => {
-            // alert('加载中...');
-          },1000);
-           Array.from({length:this.page_index}).map((item,i) => {
-                switch (parseInt(`${val}`)) {  
-                case i + 1 : this.sites = this.sites.slice(this.pageSliceNum[i],parseInt(i + 1 + '0'));
-              }
-            });
-           
-        })
-      }
-    },
-    mounted () {
-      this.addNumHalder();
-        console.log(this.page_index);
-      this.$nextTick(function () {
-        var _this = this;
-        _this.$http.get('http://www.zg.com').then(res => {
-          res.pages.forEach(val => {
-            _this.sites.push(
-              {                    
-                  id: val.id,
-                name: val.name,
-                mobile: val.mobile,
-                idCard: val.idCard,
-                address: val.address
-              }
-            ),
-            _this.sites = _this.sites.slice(0,10); //默认显示十条数据
-          })
-        }).catch(res =>{
-          console.log(res);
-        })
-      })
+        });
+        this.isActive = true;
+        // 页码
+        setTimeout(() => {
+          res.statusCode === 200 && res.success === true
+            ? (this.isActive = false)
+            : (this.isActive = true);
+        }, 400);
+        Array.from({ length: this.page_index }).map((item, i) => {
+          switch (parseInt(`${val}`)) {
+            case i + 1:
+              this.sites = this.sites.slice(
+                this.pageSliceNum[i],
+                parseInt(i + 1 + "0")
+              );
+          }
+        });
+      });
     }
-} 
+  },
+  mounted() {
+    this.addNumHalder();
+    console.log(this.page_index);
+    this.$nextTick(function() {
+      var _this = this;
+      _this.$http
+        .get("http://www.zg.com")
+        .then(res => {
+          res.pages.forEach(val => {
+            _this.sites.push({
+              id: val.id,
+              name: val.name,
+              mobile: val.mobile,
+              idCard: val.idCard,
+              address: val.address
+            }),
+              (_this.sites = _this.sites.slice(0, 10)); //默认显示十条数据
+          });
+        })
+        .catch(res => {
+          console.log(res);
+        });
+    });
+  }
+}  
 </script>
