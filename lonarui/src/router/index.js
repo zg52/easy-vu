@@ -9,7 +9,7 @@ import store from '@/components/store'
 import vueAxios from '@/components/vueAxios'
 import login from '@/components/login'
 import listDetails from '@/components/listDetails'
-
+import shoppingCart from '@/components/shoppingCart'
 // start
 
 // import head_first from '@/components/public/head_first'
@@ -54,8 +54,6 @@ export default new Router({
         console.log(next);
       }
     },
-
-
     {// 404页面
       path:'*',
       name:'Error',
@@ -78,9 +76,14 @@ export default new Router({
         component:login
       },
       {
-        path:'/',
+        path:'/listDetails',
         name:'listDetails',
         component:listDetails
+      },
+      {
+        path: '/',
+        name: 'shoppingCart',
+        component: shoppingCart
       }
   ]
 })

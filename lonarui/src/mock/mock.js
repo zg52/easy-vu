@@ -1,6 +1,12 @@
 // 使用 Mock
 var Mock = require('mockjs')
 var datas = Mock.mock('http://www.zg.com', {
+  "msg": "登录成功",
+  "success": true,
+  "statusCode": 200,
+  "error": 500,
+  "number|+1": 202,
+  "vip|1-8": "★",
   "login": [
     {
       "id": 1,
@@ -27,15 +33,7 @@ var datas = Mock.mock('http://www.zg.com', {
       "mobile": '18987676545'
     }
   ],
-
-  "msg": "登录成功",
-  "success": true,
-  "statusCode": 200,
-  "error": 500,
-  "number|+1": 202,
-  "vip|1-8": "★",
   // 分页
-
   "pages": [
     {
       "id": '1',
@@ -168,7 +166,7 @@ var datas = Mock.mock('http://www.zg.com', {
       "idCard": "62283867678887653x",
       "address": "waef"
     },
-      {
+    {
       "id": '21',
       "name": "qq",
       "mobile": "15652970369",
@@ -238,7 +236,7 @@ var datas = Mock.mock('http://www.zg.com', {
       "idCard": "62283867678887653x",
       "address": "waef"
     },
-      {
+    {
       "id": '31',
       "name": "qq",
       "mobile": "15652970369",
@@ -308,7 +306,7 @@ var datas = Mock.mock('http://www.zg.com', {
       "idCard": "62283867678887653x",
       "address": "waef"
     },
-     {
+    {
       "id": '41',
       "name": "qq",
       "mobile": "15652970369",
@@ -378,7 +376,43 @@ var datas = Mock.mock('http://www.zg.com', {
       "idCard": "62283867678887653x",
       "address": "waef"
     }
-  ]
+  ],
+  //商品相关
+  "shoppingLists": {
+    "cartList_cart": [
+      {
+        cartList_img: require('../assets/image/lxwm-nj.png'),
+        cartList_tit: '分万分飞飞飞',
+        cartList_give: 'jifnaewifo',
+        cartList_price: '122.00',
+        cartList_totalPrice: ''
+      },
+      {
+        cartList_img: require('../assets/image/lxwm-bj.png'),
+        cartList_tit: '324343发发',
+        cartList_give: 'jifnaewifo',
+        cartList_price: '220.00',
+        cartList_totalPrice: ''
+      },
+      {
+        cartList_img: require('../assets/image/lxwm-wh.png'),
+        cartList_tit: '基于橘一天京',
+        cartList_give: '教育厅金太阳',
+        cartList_price: '22.00',
+        cartList_totalPrice: ''
+      },
+      {
+        cartList_img: require('../assets/image/lxwm-cd.png'),
+        cartList_tit: 'VB从别发给',
+        cartList_give: 'jifn嗯嗯嗯eeeaewifo',
+        cartList_price: '1220.00',
+        cartList_totalPrice: ''
+      }
+    ],
+    "shopping_lists": [
+
+    ]
+  }
 })
 
 

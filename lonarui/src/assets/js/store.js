@@ -56,16 +56,14 @@ const modlue2 = {
 //new
 const modlue3 = {
 	state: {
-		URL: 'http://www.xuefu.com/byxf/data/image/'
-	},
-	// mutations: {
-	//
-	// }
+        URL: 'http://www.xuefu.com/byxf/data/image/',
+        requestUrl: 'http://www.zg.com',//总数据接口
+	} 
 }
 export default new Vuex.Store({
     modules: {
         first: modlue1,
         second: modlue2,
-		    third: modlue3
+		third: modlue3
     }
 });

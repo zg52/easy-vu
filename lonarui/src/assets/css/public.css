@@ -1,0 +1,122 @@
+body {
+  line-height: 1;
+}
+/*鏂囨湰*/
+.t-left {
+  text-align: left;
+}
+.t-center {
+  text-align: center;
+}
+.t-right {
+  text-align: right;
+}
+.d-block {
+  display: block;
+}
+.d-none {
+  display: none;
+}
+.d-inline {
+  display: inline;
+}
+.d-in-block {
+  display: inline-block;
+}
+.f-weight {
+  font-weight: bold;
+}
+.v-middle {
+  vertical-align: middle;
+}
+.v-top {
+  vertical-align: top;
+}
+/*寮规€х洅*/
+.flex {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+}
+.flex-inline {
+  display: inline-flex;
+  display: -webkit-inline-flex;
+  display: -moz-inline-flex;
+}
+.flex-between {
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+}
+.flex-around {
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+}
+.flex-start {
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+}
+.flex-end {
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  -moz-justify-content: flex-end;
+}
+.item-center {
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+}
+.item-end {
+  align-items: flex-end;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+}
+.flex-center {
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+}
+.flex1 {
+  flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+}
+.flexbetween {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+}
+/* 通用变量 */
+.ellipsis1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+.trans4 {
+  transition: all 0.4s;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+}
+.scale05 {
+  transform: scale(1.05, 1.05);
+}
+.translate4 {
+  transform: translate(0, -4px);
+  -webkit-transform: translate(0, -4px);
+  -ms-transform: translate(0, -4px);
+  -moz-transform: translate(0, -4px);
+}
+.w100 {
+  width: 100%;
+}
