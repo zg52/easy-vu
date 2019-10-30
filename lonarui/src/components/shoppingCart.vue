@@ -148,6 +148,7 @@
     border-radius: 50%;
     .t-center;
     .fz(20);
+    .mr(5);
    }
     cursor: pointer;
     .el-icon-check {
@@ -203,7 +204,7 @@
         </li>
       </ul>
       <div class="settlement">
-       <span class="allOption" @click="allOptionHandler"> <i :class="{'el-icon-check':allOption}"></i> {{ '全选' }} </span>
+       <span class="allOption" @click="allOptionHandler"> <i :class="{'el-icon-check':allOption}"></i>{{ allTheSelected }}</span>
       </div>
     </div>
   </div>
@@ -218,14 +219,19 @@ export default {
       requestUrl:this.$store.state.third.requestUrl,
       cartLists: [],
       allOption: false,
-      cartLists_index:0
-       
+      cartLists_index:0,
+      allTheSelected: '全选',
+      cartIndex () { //购物车列表索引
+          return this.cartLists.map((res,index) => {
+           return index
+       }) 
+       }
     }
   },
     filters: {
     shopping (txt,s) {
       return  txt + ' cart'
-    }
+    } 
   },
   beforeMount() {
   },
@@ -239,18 +245,21 @@ export default {
     checkedBox (index){  //利用includes查找一个元素是否存在于一个元素中返回的布尔值添加或移除选中状态 
       this.isActiveArr.includes(index) ?
       this.isActiveArr = this.isActiveArr.filter(res => res != index) :
-      this.isActiveArr.push(index)
+      this.isActiveArr.push(index);
+
+      this.isActiveArr.sort().length == this.cartIndex().sort().length ?
+     ( this.allTheSelected = '全选',this.allOption = true) :
+      ( this.allOption = false)
+      console.log(this.isActiveArr.sort().length);
+      console.log(this.cartIndex());
     },
 // 全选
     allOptionHandler () {
+      console.log();
       let _this = this;
-       var optionAllIndex = _this.cartLists.map((res,index) => {
-         return index
-       });
-       
-      this.allOption === false ?
-      (this.allOption = true,this.isActiveArr = optionAllIndex) :
-      (this.allOption = false)
+      this.allOption === false && this.isActiveArr != this.cartIndex() ? 
+      (this.allOption = true,this.isActiveArr = this.cartIndex(),this.allTheSelected = '取消全选') :
+      (this.allOption = false,this.isActiveArr = new Array,this.allTheSelected = '全选')
     },
       getCartLists () {
       // 拉去购物车列表
