@@ -203,7 +203,7 @@
         </li>
       </ul>
       <div class="settlement">
-       <span class="allOption" @click="allOptionHandler"> <i :class="{'el-icon-check':allOption}"></i> 全选 </span>
+       <span class="allOption" @click="allOptionHandler"> <i :class="{'el-icon-check':allOption}"></i> {{ '全选' }} </span>
       </div>
     </div>
   </div>
@@ -250,7 +250,7 @@ export default {
        
       this.allOption === false ?
       (this.allOption = true,this.isActiveArr = optionAllIndex) :
-      (this.allOption = false,this.isActiveArr = new Array)
+      (this.allOption = false)
     },
       getCartLists () {
       // 拉去购物车列表
