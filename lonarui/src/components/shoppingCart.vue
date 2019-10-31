@@ -137,6 +137,9 @@
 } 
 .settlement {
    .mt(30); 
+   .flex;
+   .flex-between;
+
   }
 .allOption {
   .fz(16);
@@ -157,7 +160,21 @@
     color: #fff;
 }
   }
-  
+  .check-out {
+    width:100px;
+    height: 40px;
+     background: rgb(251, 96, 6);
+     .fz(14);
+     color: #fff;
+     line-height: 40px;
+     .t-center;
+     .d-in-block;
+     cursor: pointer;
+     .trans4;
+     &:hover {
+       opacity: .7;
+     }
+  }
 </style>
 <template>
   <div class="shoppingCart">
@@ -205,6 +222,7 @@
       </ul>
       <div class="settlement">
        <span class="allOption" @click="allOptionHandler"> <i :class="{'el-icon-check':allOption}"></i>{{ allTheSelected }}</span>
+       <span class="check-out">结账</span>
       </div>
     </div>
   </div>
