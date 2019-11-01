@@ -288,13 +288,13 @@ export default {
     });
   },
   methods: {
-    //  增加上商品数量
+//  增加上商品数量
     increase_num(i) {
       let cart_el1 = this.cartLists[i];
       cart_el1.priceNum = cart_el1.priceNum + 1;
       cart_el1.cartList_totalPrice = parseInt(cart_el1.cartList_totalPrice) + parseInt(cart_el1.cartList_price);
     },
-    // 递减商品数量
+// 递减商品数量
     decrease_num(i) {
       let _this = this;
       let cart_el2 = _this.cartLists[i];
@@ -305,33 +305,65 @@ export default {
         cart_el2.cartList_totalPrice = parseInt(cart_el2.cartList_totalPrice) +-parseInt(cart_el2.cartList_price);
       }
     },
-    // 单选/多选
+// 单选/多选
     checkedBox(index) {
+       
       //利用includes查找一个元素是否存在于一个元素中返回的布尔值添加或移除选中状态
       this.isActiveArr.includes(index)
-        ? (this.isActiveArr = this.isActiveArr.filter(res => res != index))
-        : this.isActiveArr.push(index);
+        ? (
+           this.isActiveArr = this.isActiveArr.filter(res => res != index),
+            this.quantity = this.quantity - 1,
+          this.totalMoney = parseInt(this.totalMoney) - parseInt(this.cartLists[index].cartList_totalPrice)
+          )
+        : (
+          this.isActiveArr.push(index),
+          this.quantity = this.quantity + 1,
+          this.totalMoney = parseInt(this.totalMoney) + parseInt(this.cartLists[index].cartList_totalPrice)
+          );
 
-      this.isActiveArr.sort().length == this.cartIndex().sort().length
-        ? ((this.allTheSelected = "全选"), (this.allOption = true))
-        : (this.allOption = false);
-      console.log(this.isActiveArr.sort().length);
-      console.log(this.cartIndex());
+        this.isActiveArr.sort().length == this.cartIndex().sort().length
+        ? (
+          this.allTheSelected = "全选",
+           this.allOption = true
+          //  this.cartLists.map((val,index) => {
+          //    console.log(val)
+          //  })
+           )
+        : (
+          this.allOption = false
+          );
+// 判断是否选中商品，计算总金额
     },
-    // 全选
+
+// 全选
     allOptionHandler() {
-      console.log();
+   
       let _this = this;
+      let get_total = 0;
       this.allOption === false && this.isActiveArr != this.cartIndex()
-        ? ((this.allOption = true),
-          (this.isActiveArr = this.cartIndex()),
-          (this.allTheSelected = "取消全选"))
-        : ((this.allOption = false),
-          (this.isActiveArr = new Array()),
-          (this.allTheSelected = "全选"));
+        ? (
+          this.allOption = true,
+          this.isActiveArr = this.cartIndex(),
+          this.allTheSelected = "取消全选",
+          this.cartLists.map((val,index) => {
+              get_total += parseInt(val.cartList_totalPrice)
+           }),
+            this.totalMoney = get_total,
+          this.quantity = this.cartLists.length
+          )
+        : (
+          this.allOption = false,
+          this.isActiveArr = new Array(),
+          this.allTheSelected = "全选",
+            this.totalMoney = 0,
+          this.quantity = 0
+         
+          );
+          console.log(get_total);
+         
     },
     getCartLists() {
-      // 拉去购物车列表
+// 拉去购物车列表
       this.$http
         .getJson(this.requestUrl)
         .then(res => {
@@ -347,7 +379,7 @@ export default {
           });
         }).catch(error => {
           console.log(error);
-        });
+        })
     }
   }
 };
