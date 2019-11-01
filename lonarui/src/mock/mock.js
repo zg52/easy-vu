@@ -385,28 +385,24 @@ var datas = Mock.mock('http://www.zg.com', {
         cartList_tit: '分万分飞飞飞',
         cartList_give: 'jifnaewifo',
         cartList_price: '122.00',
-        cartList_totalPrice: ''
       },
       {
         cartList_img: require('../assets/image/lxwm-bj.png'),
         cartList_tit: '324343发发',
         cartList_give: 'jifnaewifo',
         cartList_price: '220.00',
-        cartList_totalPrice: ''
       },
       {
         cartList_img: require('../assets/image/lxwm-wh.png'),
         cartList_tit: '基于橘一天京',
         cartList_give: '教育厅金太阳',
         cartList_price: '22.00',
-        cartList_totalPrice: ''
       },
       {
         cartList_img: require('../assets/image/lxwm-cd.png'),
         cartList_tit: 'VB从别发给',
         cartList_give: 'jifn嗯嗯嗯eeeaewifo',
         cartList_price: '1220.00',
-        cartList_totalPrice: ''
       }
     ],
     "shopping_lists": [
