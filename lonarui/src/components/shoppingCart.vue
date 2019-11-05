@@ -299,7 +299,7 @@ export default {
       ) : null;
 
         cart_el1.cartList_totalPrice = parseInt(cart_el1.cartList_totalPrice) + parseInt(cart_el1.cartList_price);//点击累计加单价金额
-        cart_el1.priceNum === 2 ?  this.totalMoney = parseInt(cart_el1.cartList_price) : null;//点击按钮时首先将商品单价赋值给合计金额
+        cart_el1.priceNum === 2 ?  this.totalMoney = parseInt(this.totalMoney) + parseInt(cart_el1.cartList_price) : null;//点击按钮时首先将商品单价赋值给合计金额
           this.totalMoney = parseInt(this.totalMoney) + parseInt(cart_el1.cartList_price) //每次点击计算合计金额
  
 
