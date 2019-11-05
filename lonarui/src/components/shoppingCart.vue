@@ -250,11 +250,11 @@ import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      isActiveArr: [],
-      priceNum: 1,
+      isActiveArr: [],//绑定的class
+      priceNum: 1,//默认商品数量1
       requestUrl: this.$store.state.third.requestUrl,
-      cartLists: [],
-      allOption: false,
+      cartLists: [],//购物车列表
+      allOption: false, //单选/全选状态
       cartLists_index: 0,
       allTheSelected: "全选",
       quantity: 0,//结算的商品数量
@@ -280,45 +280,54 @@ export default {
     shopping(txt, s) {
       return txt + " cart";
     }
-  },
-  beforeMount() {},
-  mounted() {
-    this.$nextTick(function() {
-      this.getCartLists();
-    });
-  },
-  methods: {
-//  增加上商品数量
-    increase_num(i) {
-      let cart_el1 = this.cartLists[i];
-      cart_el1.priceNum = cart_el1.priceNum + 1;
-      cart_el1.cartList_totalPrice = parseInt(cart_el1.cartList_totalPrice) + parseInt(cart_el1.cartList_price);
+    },
+    beforeMount() {},
+    mounted() {
+      this.$nextTick(function() {
+        this.getCartLists();
+      });
+    },
+    methods: {
+  //  增加上商品数量
+      increase_num(i) {
+        let cart_el1 = this.cartLists[i];
+        cart_el1.priceNum = cart_el1.priceNum + 1;//点击按钮每次加1
+
+       // 点击增加按钮时，设置选中商品，将该商品累计金额增加到合计金额总值；
+        !this.isActiveArr.includes(i) ? (
+         this.isActiveArr.push(i)
+      ) : null;
+
+        cart_el1.cartList_totalPrice = parseInt(cart_el1.cartList_totalPrice) + parseInt(cart_el1.cartList_price);//点击累计加单价金额
+        cart_el1.priceNum === 2 ?  this.totalMoney = parseInt(cart_el1.cartList_price) : null;//点击按钮时首先将商品单价赋值给合计金额
+          this.totalMoney = parseInt(this.totalMoney) + parseInt(cart_el1.cartList_price) //每次点击计算合计金额
+ 
+
     },
 // 递减商品数量
     decrease_num(i) {
       let _this = this;
-      let cart_el2 = _this.cartLists[i];
+      let cart_el2 = _this.cartLists[i];//购物车列表每项
       let decrease_priceNum = cart_el2.priceNum;
       decrease_priceNum <= 1 ? String : decrease();
       function decrease() {
-       cart_el2.priceNum = decrease_priceNum - 1;
-        cart_el2.cartList_totalPrice = parseInt(cart_el2.cartList_totalPrice) +-parseInt(cart_el2.cartList_price);
+       cart_el2.priceNum = decrease_priceNum - 1;//点击按钮每次减1
+        cart_el2.cartList_totalPrice = parseInt(cart_el2.cartList_totalPrice) + -parseInt(cart_el2.cartList_price);//点击累计减单价金额
       }
     },
 // 单选/多选
     checkedBox(index) {
-       
       //利用includes查找一个元素是否存在于一个元素中返回的布尔值添加或移除选中状态
       this.isActiveArr.includes(index)
         ? (
            this.isActiveArr = this.isActiveArr.filter(res => res != index),
-            this.quantity = this.quantity - 1,
-          this.totalMoney = parseInt(this.totalMoney) - parseInt(this.cartLists[index].cartList_totalPrice)
+            this.quantity = this.quantity - 1,//结算商品个数
+          this.totalMoney = parseInt(this.totalMoney) - parseInt(this.cartLists[index].cartList_totalPrice)   // 合计金额
           )
         : (
           this.isActiveArr.push(index),
-          this.quantity = this.quantity + 1,
-          this.totalMoney = parseInt(this.totalMoney) + parseInt(this.cartLists[index].cartList_totalPrice)
+          this.quantity = this.quantity + 1,//结算商品个数
+          this.totalMoney = parseInt(this.totalMoney) + parseInt(this.cartLists[index].cartList_totalPrice)  // 合计金额
           );
 
         this.isActiveArr.sort().length == this.cartIndex().sort().length
@@ -335,9 +344,8 @@ export default {
 // 判断是否选中商品，计算总金额
     },
 
-// 全选
+// 商品全选
     allOptionHandler() {
-   
       let _this = this;
       let get_total = 0;
       this.allOption === false && this.isActiveArr != this.cartIndex()
@@ -362,8 +370,9 @@ export default {
           console.log(get_total);
          
     },
+// 拉取购物车列表
     getCartLists() {
-// 拉去购物车列表
+
       this.$http
         .getJson(this.requestUrl)
         .then(res => {
