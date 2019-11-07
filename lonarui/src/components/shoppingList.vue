@@ -136,7 +136,7 @@ export default {
                     shumaLban1: shumaLban2Data.shumaLban1,
                     url2      : '22',
                     shumaRban:shumaLban2Data.shumaRban,
-                    url3      : '2',
+                    url3      : '2', 
                   }
                )
         }).catch(error => {
