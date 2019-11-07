@@ -384,29 +384,48 @@ var datas = Mock.mock('http://www.zg.com', {
         cartList_img: require('../assets/image/lxwm-nj.png'),
         cartList_tit: '分万分飞飞飞',
         cartList_give: 'jifnaewifo',
-        cartList_price: '122.00',
+        cartList_price: '1.00',
       },
       {
         cartList_img: require('../assets/image/lxwm-bj.png'),
         cartList_tit: '324343发发',
         cartList_give: 'jifnaewifo',
-        cartList_price: '220.00',
+        cartList_price: '1.00',
       },
       {
         cartList_img: require('../assets/image/lxwm-wh.png'),
         cartList_tit: '基于橘一天京',
         cartList_give: '教育厅金太阳',
-        cartList_price: '22.00',
+        cartList_price: '1.00',
       },
       {
         cartList_img: require('../assets/image/lxwm-cd.png'),
         cartList_tit: 'VB从别发给',
         cartList_give: 'jifn嗯嗯嗯eeeaewifo',
-        cartList_price: '1220.00',
+        cartList_price: '1.00',
       }
     ],
-    "shopping_lists": [
-
+    "shoppingPage": [
+      {
+        shumaLban : 'https://img.alicdn.com/tfs/TB1GqC8XE6FK1Jjy1XdXXblkXXa-223-377.jpg',
+        shumaRban:'https://img.alicdn.com/tfs/TB1ZVApXwvGK1Jjy0FcXXXXmVXa-223-341.jpg',
+        url2      : '',
+        url33     : '',
+        shumaLban1: '',
+        shumaLnavs: [
+          {
+            url       : '',
+            tit: '相机'
+          }
+        ],
+        detailss: [
+          {
+            txt:'111',
+            map:'',
+            price: ''
+          }
+        ]
+      }
     ]
   }
 })

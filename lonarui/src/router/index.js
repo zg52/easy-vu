@@ -10,6 +10,7 @@ import vueAxios from '@/components/vueAxios'
 import login from '@/components/login'
 import listDetails from '@/components/listDetails'
 import shoppingCart from '@/components/shoppingCart'
+import shoppingList from '@/components/shoppingList'
 // start
 
 // import head_first from '@/components/public/head_first'
@@ -80,10 +81,15 @@ export default new Router({
         name:'listDetails',
         component:listDetails
       },
-      {
-        path: '/',
+      { //购物车
+        path: '/shoppingCart',
         name: 'shoppingCart',
         component: shoppingCart
+      },
+      {
+        path: '/',
+        name: 'shoppingList',
+        component: shoppingList
       }
   ]
 })
