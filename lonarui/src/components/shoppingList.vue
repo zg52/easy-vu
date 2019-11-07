@@ -61,6 +61,9 @@ h2 span {
 }
 a + div {
   .w(223);
+  a {
+    .ml(37);
+  }margin-top: 20px;
 }
 .shumaL-list a {
   display: inline-block;
@@ -89,12 +92,12 @@ li p {
             <img :src="shuma.shumaLban" width="223" height="377"/>
           </a>
           <div class="shumaL-list">
-           <a :href="shumaList.url" v-for="(shumaLnav,index) of shuma.shumaLnavs">{{ shumaList.tit }}</a>
+           <a v-for="(shumaLnav,index) of shuma.shumaLnavs" :href="shumaLnav.url">{{ shumaLnav.tit }}</a>
           </div>                     
         </div>
         <div class="flex flex-wrap">
           <li v-for="(details,index) of shuma.detailss">
-            <a :href="details.url" target="blank" :title="details.txt">
+            <a :href="details.href" target="blank" :title="details.txt">
               <img width="185" height="196" :src="details.map" />
               <p class="protwo-title ellipsis1">{{ details.txt }}</p>
               <p class="parttwo-price">
@@ -104,11 +107,11 @@ li p {
           </li>
         </div>
         <div>   
-          <a :href="shumaList.url2" target="blank">                               
-            <img :src="shumaList.shumaLban1" width="223" height="341"/>
+          <a :href="shuma.url2" target="blank">                               
+            <img :src="shuma.shumaLban1" width="223" height="341"/>
           </a>
-          <a :href="shumaList.url3" target="blank">
-            <img :src="shumaList.shumaRban" width="223" height="158"/>
+          <a :href="shuma.url3" target="blank">
+            <img :src="shuma.shumaRban" width="223" height="158"/>
           </a>
         </div>
       </div>
@@ -116,57 +119,24 @@ li p {
   </div>
 </template> 
 <script>
-import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
       requestUrl: this.$store.state.third.requestUrl,
-      shumaList: [
-      //  {
-                  //   shumaLban : 'https://img.alicdn.com/tfs/TB1GqC8XE6FK1Jjy1XdXXblkXXa-223-377.jpg',
-                  //   url2      : '22',
-                  //   url3     : '2',
-                  //   shumaLban1: '2',
-                  //   shumaLban2:'2',
-                  //   shumaLnavs: [
-                  //     {
-                  //       url:'2',
-                  //       tit: '相机'
-                  //     }
-                  //   ],
-                  //   detailss: [
-                  //     {
-                  //       txt:'111',
-                  //       map:'2',
-                  //       price: '2'
-                  //     }
-                  //   ]
-                  // }
-      ]
+      shumaList: []
     }},
     mounted () {
            this.$http.post(this.requestUrl).then(res => {
-               console.log(res.shoppingLists.shoppingPage[0].shumaLban);
+             let shumaLban2Data = res.shoppingLists.shoppingPage[0];
                this.shumaList.push(
                  {
-                    shumaLban : res.shoppingLists.shoppingPage[0].shumaLban,
-                    shumaRban: res.shoppingLists.shoppingPage[0].shumaRban,
+                    shumaLban : shumaLban2Data.shumaLban,
+                    shumaLnavs: shumaLban2Data.shumaLnav,
+                    detailss: shumaLban2Data.detailss,
+                    shumaLban1: shumaLban2Data.shumaLban1,
                     url2      : '22',
+                    shumaRban:shumaLban2Data.shumaRban,
                     url3      : '2',
-                    shumaLban2:'2',
-                    shumaLnavs: [
-                      {
-                        url:'2',
-                        tit: '相机'
-                      }
-                    ],
-                    detailss: [
-                      {
-                        txt:'111',
-                        map:'2',
-                        price: '2'
-                      }
-                    ]
                   }
                )
         }).catch(error => {
