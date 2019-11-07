@@ -487,7 +487,7 @@ var datas = Mock.mock('http://www.zg.com', {
         shumaLban1: 'https://img.alicdn.com/tfs/TB1ZVApXwvGK1Jjy0FcXXXXmVXa-223-341.jpg',
         url2      : '',
         shumaRban:'https://img.alicdn.com/tfs/TB1d.AnXwvGK1Jjy0FfXXbykpXa-223-158.jpg',
-        url33     : '',
+        url33     : ''
       }
     ]
   }
