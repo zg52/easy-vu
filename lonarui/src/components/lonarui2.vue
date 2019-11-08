@@ -14,7 +14,7 @@ li {
     v-for="(list,index) of lists"
     :key="list.id">{{list.name}}</span>
     </li>
-    <p @mouseenter.prevent="ops">{{mes}}</p>
+    <p @mouseenter.prevent="ops">{{mes}}eee</p>
     <p>{{$route.params.names}}link to 传参</p>
 </div>
 </template> 

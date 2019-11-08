@@ -116,12 +116,22 @@ li p {
         </div>
       </div>
     </div>
+
+    <!-- 将商品值传给参数页 -->
+    <getParams
+        lists="www"
+    ></getParams>
   </div>
 </template> 
 <script>
+import getParams from './getParams.vue'
 export default {
+  components: {
+    getParams
+  },
   data() {
     return {
+      ids:[1,2,3,4,54,5],
       requestUrl: this.$store.state.third.requestUrl,
       shumaList: []
     }},

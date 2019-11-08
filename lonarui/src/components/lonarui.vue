@@ -67,7 +67,7 @@ export default {
       mes:'111',
       num:0,
       lists:[
-        {as:'first',cont:'传参'},
+        {as:'first1111111111',cont:'传参'},
         {as:'two',cont:'2'},
         {as:'three',cont:'3'}
       ]

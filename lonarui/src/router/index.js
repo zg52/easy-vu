@@ -10,7 +10,8 @@ import vueAxios from '@/components/vueAxios'
 import login from '@/components/login'
 import listDetails from '@/components/listDetails'
 import shoppingCart from '@/components/shoppingCart'
-import shoppingList from '@/components/shoppingList'
+import shoppingList from '@/components/shoppingList' //商品列表
+import getParams from '@/components/getParams'//参数页
 // start
 
 // import head_first from '@/components/public/head_first'
@@ -87,9 +88,14 @@ export default new Router({
         component: shoppingCart
       },
       {
-        path: '/',
+        path: '/shoppingList',
         name: 'shoppingList',
         component: shoppingList
+      },
+      {
+        path: '/',
+        name: 'getParams',
+        component: getParams
       }
   ]
 })

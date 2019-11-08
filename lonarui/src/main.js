@@ -20,6 +20,7 @@ import './assets/css/index.css' //首页
 import './assets/css/header_z.css'//页头css
 import './assets/css/footer.css'//页底css
 import './assets/css/index_z.css' //非首页公用css
+import './assets/css/animate.css'  
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);
