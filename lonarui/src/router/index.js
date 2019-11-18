@@ -1,55 +1,50 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import lonarui from '@/components/lonarui'
-import lonarui2 from '@/components/lonarui2'
-import lonarui3 from '@/components/lonarui3'
-import lonarui4 from '@/components/lonarui4'
-import Error from '@/components/Error'
-import store from '@/components/store'
-import vueAxios from '@/components/vueAxios'
-import login from '@/components/login'
-import listDetails from '@/components/listDetails'
-import shoppingCart from '@/components/shoppingCart'
-import shoppingList from '@/components/shoppingList' //商品列表
-import getParams from '@/components/getParams'//参数页
-// start
-
-// import head_first from '@/components/public/head_first'
-import index from '@/components/index'
-
+import lonarui from '@/components/crm/lonarui'
+import lonarui2 from '@/components/crm/lonarui2'
+import lonarui3 from '@/components/crm/lonarui3'
+import lonarui4 from '@/components/crm/lonarui4'
+import Error from '@/components/crm/public/Error'
+import store from '@/components/crm/store'
+import vueAxios from '@/components/crm/vueAxios'
+import login from '@/components/crm/login'
+import listDetails from '@/components/crm/listDetails'
+import shoppingCart from '@/components/crm/shoppingCart'
+import shoppingList from '@/components/crm/shoppingList' //商品列表
+import getParams from '@/components/crm/getParams'//参数页
+import index from '@/components/crm/index'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-        {
-          path:'/index',
-          name: 'index',
-          component: index,
-        },
+    {
+      path: '/',
+      name: 'index',
+      component: index,
+    },
     {
       path: '/lonarui',
       name: 'lonarui',
       component: lonarui,
-      children :[
+      children: [
         {
-      path: '/lonarui2',
-      name: 'lonarui2',
-      component: lonarui2
+          path: '/lonarui2',
+          name: 'lonarui2',
+          component: lonarui2
+        },
+        {
+          path: '/lonarui3',
+          name: 'lonarui3',
+          component: lonarui3
+        }
+      ]
     },
     {
-      path:'/lonarui3',
-      name:'lonarui3',
-      component:lonarui3
-
-    }
-  ]
-    },
-    {
-      path:'/lonarui4/:lisId/:listTit',
-      name:'lonarui4',
-      component:lonarui4,
-      beforeEnter:(to,from,next)=>{
+      path: '/lonarui4/:lisId/:listTit',
+      name: 'lonarui4',
+      component: lonarui4,
+      beforeEnter: (to, from, next) => {
         console.log('我进入了lonarui4模板');
         console.log(to);
         console.log(from);
@@ -57,45 +52,45 @@ export default new Router({
       }
     },
     {// 404页面
-      path:'*',
-      name:'Error',
-      component:Error
+      path: '*',
+      name: 'Error',
+      component: Error
     },
     {
-      path:'/store',
-      name:'store',
-      component:store
-      },
-      // vue-axios
-      {
-        path:'/vueAxios',
-        name:'vueAxios',
-        component:vueAxios
-      },
-      {
-        path:'/login',
-        name:'login',
-        component:login
-      },
-      {
-        path:'/listDetails',
-        name:'listDetails',
-        component:listDetails
-      },
-      { //购物车
-        path: '/shoppingCart',
-        name: 'shoppingCart',
-        component: shoppingCart
-      },
-      {
-        path: '/shoppingList',
-        name: 'shoppingList',
-        component: shoppingList
-      },
-      {
-        path: '/',
-        name: 'getParams',
-        component: getParams
-      }
+      path: '/store',
+      name: 'store',
+      component: store
+    },
+    // vue-axios
+    {
+      path: '/vueAxios',
+      name: 'vueAxios',
+      component: vueAxios
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/listDetails',
+      name: 'listDetails',
+      component: listDetails
+    },
+    { //购物车
+      path: '/shoppingCart',
+      name: 'shoppingCart',
+      component: shoppingCart
+    },
+    {
+      path: '/shoppingList',
+      name: 'shoppingList',
+      component: shoppingList
+    },
+    { //测试公用组件
+      path: '/getParams',
+      name: 'getParams',
+      component: getParams
+    }
   ]
 })

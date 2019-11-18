@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-	  <head_first></head_first>
+	  <crm_head></crm_head>
  <router-view name="right" style="float:right;width:50%;background-color:#c0c;height:300px;"></router-view>
  <router-view name="left" style="float:left;width:50%;background-color:#ccc;height:300px;"></router-view>
  <router-view/>
-  <foot></foot>
+  <crm_base></crm_base>
 
   </div>    
 </template>
@@ -18,12 +18,12 @@
 //   }
 // }
 // }
-import head_first from './components/public/head_first.vue'
-import foot from './components/public/foot.vue'
+import crm_head from './components/crm/public/crm_head.vue'
+import crm_base from './components/crm/public/crm_base.vue'
 export default {
 	components:{
-		head_first,
-		foot
+		crm_head,
+		crm_base
 	}
 }
 </script>
