@@ -13,3 +13,5 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+# .gitignore 文件的作用就是告诉git,
+# push的时候忽略指定的文件夹或者文件，

@@ -7,3 +7,32 @@ indent_size = 2
 end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+# EditorConfig可以帮助开发者在不同的编辑器和IDE之间定义和维护一致的代码风格。
+# charset: 文件字符编码
+
+# latin1
+# utf-8
+# utf-16be
+# utf-16le
+# indent_style: 缩进类型。可选值
+
+# space
+# tab
+# indent_size: 缩进数量。可选值
+
+# 整数。一般设置 2 或 4。
+# tab
+# insert_final_newline：是否在文件的最后插入一个空行。可选值
+
+# true
+# false
+# end_of_line：行结束文件格式（Unix，DOS，Mac）
+
+# lf。一般用这个。
+# crlf
+# cr
+# trim_trailing_whitespace：表示行末尾是否允许空格
+
+# true
+# false
