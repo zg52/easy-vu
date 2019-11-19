@@ -98,7 +98,7 @@ h2 {
 }
 </style>
 <template>
-  <div class="listDetails mt30">
+  <div class="listDetails mt30"> <router-link to="/">to index</router-link>
     <div class="mt1100">
       <h2 class="codeTit">地址详情页</h2>
       <div>

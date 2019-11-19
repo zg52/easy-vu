@@ -16,7 +16,7 @@ li {
   <div>
     <transition-group tag="ul" name="imgs">
       <li class="animated fadeIn"
-            v-for="(item, index) in imgArry" :key="index" v-if="num === index">
+          v-for="(item, index) in imgArry" v-if="num === index">
         <img :src="item.src"/>
       </li>
     </transition-group>

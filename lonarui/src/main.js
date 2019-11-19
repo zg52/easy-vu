@@ -16,8 +16,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/iconfont.css'   //全局icon
 import './assets/css/reset.css'   //全局reset
 // import './assets/css/public.less' //全局less
-import './assets/css/index.css' //首页
-import './assets/css/footer.css'//页底css
 import './assets/css/animate.css'  
 
 Vue.config.productionTip = false

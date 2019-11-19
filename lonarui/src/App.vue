@@ -1,29 +1,52 @@
 <template>
   <div id="app">
 	  <crm_head></crm_head>
- <router-view name="right" style="float:right;width:50%;background-color:#c0c;height:300px;"></router-view>
- <router-view name="left" style="float:left;width:50%;background-color:#ccc;height:300px;"></router-view>
- <router-view/>
   <crm_base></crm_base>
-
+  <transition :name="transitionName">
+   <router-view/>
+  </transition>
   </div>    
 </template>
 <script>
-// export default {
-//   watch : {
-//   $route (to,from){
-//     if (to.path == '/lonarui2') {
-//       this.$router.push('/lonarui2');
-//     }
-//   }
-// }
-// }
 import crm_head from './components/crm/public/crm_head.vue'
 import crm_base from './components/crm/public/crm_base.vue'
 export default {
+  data() {
+    return {
+      transitionName: 'fade'
+    }
+  },
 	components:{
 		crm_head,
 		crm_base
-	}
+  },
+    watch: {
+  "$route": function(to,from){
+    if(to.path == '/listDetails'){//如果跳到登录页，就启用slide-left类名的动画
+      this.transitionName='slide-left';
+    } 
+  }
+}
 }
 </script>
+<style>
+/* 全局设置路由切换动画 */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .6s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
+.slide-left-enter-active{
+  animation: slideInLeft .5s reverse;
+} 
+.slide-left-leave-active{
+  animation: slideOutLeft .5s reverse;
+}
+.slide-right-enter-active{
+  animation: slideInRight .5s reverse;
+} 
+.slide-right-leave-active{
+  animation: slideOutRight .5s reverse;
+}
+</style>
