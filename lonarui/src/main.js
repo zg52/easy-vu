@@ -18,7 +18,25 @@ import './assets/css/reset.css'   //全局reset
 // import './assets/css/public.less' //全局less
 import './assets/css/animate.css'  
 
-Vue.config.productionTip = false
+
+// import ECharts from 'vue-echarts'
+// import 'echarts/lib/chart/line'
+// Vue.component('chart', ECharts)
+// 引入echarts
+import echarts from 'echarts'
+
+Vue.prototype.$echarts = echarts 
+
+
+
+
+Vue.config.productionTip = false;
+Vue.config.errorHandler = (err, vm, info) => {
+  console.error('通过vue errorHandler捕获的错误');
+  console.error(err);
+  console.error(vm);
+  console.error(info);
+}
 Vue.use(ElementUI);
 Vue.use(vuex)
 Vue.prototype.$http = http;//封装的http
