@@ -1,3 +1,9 @@
+<template>
+  <div>
+  <input type="text">
+  </div>
+</template>
+
 <script>
 export default {
     props: {
@@ -12,5 +18,5 @@ export default {
       this.$slots.default // 子节点数组
     );
   }
-};
+} 
 </script>

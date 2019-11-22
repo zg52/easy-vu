@@ -12,7 +12,6 @@ import listDetails from '@/components/crm/listDetails'
 import shoppingCart from '@/components/crm/shoppingCart'
 import shoppingList from '@/components/crm/shoppingList' //商品列表
 import getParams from '@/components/crm/getParams'//参数页
-import index from '@/components/crm/index'
 
 Vue.use(Router)
 
@@ -21,7 +20,13 @@ export default new Router({
     {
       path: '/',
       name: 'index',
-      component: index,
+      // 路由懒加载
+      component: resolve => require(['.././components/crm/index.vue'],resolve ),//用require引入，将component分别打包成不同的js，按需加载，避免加载时间长
+      // component: () => import('.././components/crm/index.vue'),
+      meta: {
+        title: 'index',
+        keepAlive: true
+      }
     },
     {
       path: '/lonarui',
@@ -44,7 +49,7 @@ export default new Router({
       path: '/lonarui4/:lisId/:listTit',
       name: 'lonarui4',
       component: lonarui4,
-      beforeEnter: (to, from, next) => {
+      beforeRouteEnter: (to, from, next) => {
         console.log('我进入了lonarui4模板');
         console.log(to);
         console.log(from);
@@ -75,7 +80,10 @@ export default new Router({
     {
       path: '/listDetails',
       name: 'listDetails',
-      component: listDetails
+      component: listDetails,
+      // meta: {
+      //   keepAlive: false
+      // }
     },
     { //购物车
       path: '/shoppingCart',

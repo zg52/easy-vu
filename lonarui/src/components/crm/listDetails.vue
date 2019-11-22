@@ -151,6 +151,11 @@ export default {
     }
   },
   methods: {
+      beforeRouteLeave (to, from, next) {
+         to.meta.keepAlive = false;
+         next();
+      },
+      
     handleSizeChange(val) {},
     handleCurrentChange(val) {
       this.$http.get("http://www.zg.com").then(res => {
@@ -184,6 +189,7 @@ export default {
     }
   },
   mounted() {
+    
     this.addNumHalder();
     console.log(this.page_index);
     this.$nextTick(function() {

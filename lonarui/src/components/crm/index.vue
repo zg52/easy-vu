@@ -1,12 +1,17 @@
 <style lang="less" scoped>
+.active {
+  color: red;
+}
 </style>
 <template>
   <div>
     <router-link to="./listDetails">用户列表</router-link>
  <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"></div> -->
-  <op :level="1">this is render
+<keep-alive include="op">
+   <op :level="1">this is render
   <div>jij</div>
   </op>
+</keep-alive>
   </div>
 </template>
 <script>
@@ -21,6 +26,10 @@ export default {
     };
   },
   methods: {
+     beforeRouteLeave (to, from, next) {
+         to.meta.keepAlive = false;
+         next();
+      },
     drawLine() {
       // 基于准备好的dom，初始化echarts实例
 //       let myChart = this.$echarts.init(document.getElementById("myChart"));
@@ -45,7 +54,6 @@ export default {
   },
   mounted() {
     this.drawLine();
-    console.log(this.$attrs )
   }
 };
 </script>
