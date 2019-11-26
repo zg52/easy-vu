@@ -13,21 +13,27 @@ import shoppingCart from '@/components/crm/shoppingCart'
 import shoppingList from '@/components/crm/shoppingList' //商品列表
 import getParams from '@/components/crm/getParams'//参数页
 
-Vue.use(Router)
+Vue.use(Router) 
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
+      name: 'index', 
       // 路由懒加载
       component: resolve => require(['.././components/crm/index.vue'],resolve ),//用require引入，将component分别打包成不同的js，按需加载，避免加载时间长
       // component: () => import('.././components/crm/index.vue'),
       meta: {
         title: 'index',
         keepAlive: true
+      },
+      beforeEnter (to,from,next) {
+        console.log('进首页');
+        to.meta.keepAlive = false;
+        next();
       }
     },
+    
     {
       path: '/lonarui',
       name: 'lonarui',
@@ -49,7 +55,7 @@ export default new Router({
       path: '/lonarui4/:lisId/:listTit',
       name: 'lonarui4',
       component: lonarui4,
-      beforeRouteEnter: (to, from, next) => {
+      beforeEnter: (to, from, next) => {
         console.log('我进入了lonarui4模板');
         console.log(to);
         console.log(from);

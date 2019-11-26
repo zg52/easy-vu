@@ -3,28 +3,16 @@
     <crm_head></crm_head>
     <crm_base></crm_base>
     <!-- 不需要刷新的路由配置里面配置 -->
-    <transition
-      :name="transitionName"
-      @after-enter="afterEnter"
-      appear
-      :duration="{ enter: 500, leave: 600 }"
-      mode="out-in"
-    >
+ 
       <keep-alive>
 <router-view v-if="$route.meta.keepAlive"></router-view>
       </keep-alive>
-    </transition>
+   
 
-    <transition
-      :name="transitionName"
-      @after-enter="afterEnter"
-      appear
-      :duration="{ enter: 500, leave: 600 }"
-      mode="out-in"
-    >
+ 
       <!-- 需要刷新的路由配置里面配置 -->
       <router-view v-if="!$route.meta.keepAlive"></router-view>
-    </transition>
+ 
   </div>
 </template>
 <script>
@@ -43,7 +31,7 @@ export default {
   },
   methods: {
     afterEnter(el) {
-      console.log("动画进入之后");
+      // console.log("动画进入之后");
       el.style.background = "rgb(252, 252, 252)";
     }
     //    beforeEnter(el){
@@ -79,7 +67,7 @@ export default {
     );
   },
   watch: {
-    $route: function(to, from) {
+    '$route': function(to, from) {
       if (to.path == "/listDetails") {
         //如果跳到登录页，就启用slide-left类名的动画
         this.transitionName = "slide-fade";

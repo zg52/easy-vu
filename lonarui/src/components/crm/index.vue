@@ -5,11 +5,12 @@
 </style>
 <template>
   <div>
+    <input type="text">
     <router-link to="./listDetails">用户列表</router-link>
  <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"></div> -->
 <keep-alive include="op">
    <op :level="1">this is render
-  <div>jij</div>
+  <div>哒哒哒哒哒哒多多多</div>
   </op>
 </keep-alive>
   </div>
@@ -26,12 +27,9 @@ export default {
     };
   },
   methods: {
-     beforeRouteLeave (to, from, next) {
-         to.meta.keepAlive = false;
-         next();
-      },
-    drawLine() {
-      // 基于准备好的dom，初始化echarts实例
+// echarts
+// drawLine() {
+// 基于准备好的dom，初始化echarts实例
 //       let myChart = this.$echarts.init(document.getElementById("myChart"));
 //       // 绘制图表
 // myChart.setOption({
@@ -50,13 +48,15 @@ export default {
 //         }
 //     ]
 // })
-    }
+    // }
   },
   mounted() {
-    this.drawLine();
-  }
-};
+    // this.drawLine();//调用echarts
+  },
+//  beforeRouteEnter (to, from, next) {
+//          to.meta.keepAlive = false;
+//          next();
+//       },
+}
 </script>
-
-
  

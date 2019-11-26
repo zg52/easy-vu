@@ -5,8 +5,6 @@
     <div>{{$route.params.name1}}</div>
     <div>{{page}} + {{code}}</div>
     <div>{{$route.params.lisId}}{{$route.params.listTit}}</div>
- 
-
   </div>
 </template>
 <script>
