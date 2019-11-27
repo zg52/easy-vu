@@ -1,18 +1,29 @@
 <template>
   <div id="app">
-    <crm_head></crm_head>
-    <crm_base></crm_base>
+    <!-- <crm_head></crm_head>
+    <crm_base></crm_base> -->
     <!-- 不需要刷新的路由配置里面配置 -->
- 
-      <keep-alive>
+     <transition	
+      :name="transitionName"	
+      @after-enter="afterEnter"	
+      appear	
+      :duration="{ enter: 500, leave: 600 }"	
+      mode="out-in"	
+    >
+  <keep-alive>
 <router-view v-if="$route.meta.keepAlive"></router-view>
       </keep-alive>
-   
-
- 
+     </transition>
+    <transition	
+      :name="transitionName"	
+      @after-enter="afterEnter"	
+      appear	
+      :duration="{ enter: 500, leave: 600 }"	
+      mode="out-in"	
+    >
       <!-- 需要刷新的路由配置里面配置 -->
       <router-view v-if="!$route.meta.keepAlive"></router-view>
- 
+    </transition>
   </div>
 </template>
 <script>
@@ -32,7 +43,7 @@ export default {
   methods: {
     afterEnter(el) {
       // console.log("动画进入之后");
-      el.style.background = "rgb(252, 252, 252)";
+      // el.style.background = "rgb(252, 252, 252)";
     }
     //    beforeEnter(el){
     //       console.log('动画enter之前');

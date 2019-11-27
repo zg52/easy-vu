@@ -16,7 +16,7 @@ var datas = Mock.mock('http://www.zg.com', {
     },
     {
       "id": 2,
-      "name": "倩倩",
+      "name": "wq",
       "password": "4321",
       "mobile": '15652897653'
     },

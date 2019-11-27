@@ -51,6 +51,9 @@ export default {
     // }
   },
   mounted() {
+    this.$http.get('https://api.data.caasdata.com/index').then(res =>{
+      console.log(res.data);
+    })
     // this.drawLine();//调用echarts
   },
 //  beforeRouteEnter (to, from, next) {

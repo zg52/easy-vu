@@ -18,7 +18,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/index',
       name: 'index', 
       // 路由懒加载
       component: resolve => require(['.././components/crm/index.vue'],resolve ),//用require引入，将component分别打包成不同的js，按需加载，避免加载时间长
@@ -79,7 +79,7 @@ export default new Router({
       component: vueAxios
     },
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: login
     },
