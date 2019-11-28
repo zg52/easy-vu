@@ -10,7 +10,7 @@
  <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"></div> -->
 <keep-alive include="op">
    <op :level="1">this is render
-  <div>哒哒哒哒哒哒多多多</div>
+  <div></div>
   </op>
 </keep-alive>
   </div>

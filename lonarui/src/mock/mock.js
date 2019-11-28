@@ -10,9 +10,10 @@ var datas = Mock.mock('http://www.zg.com', {
   "login": [
     {
       "id": 1,
-      "name": "月弦笙音",
+      "name": "123",
       "password": "4321",
-      "mobile": '15652970369'
+      "mobile": '15652970369',
+      "authCode": 'pcws'
     },
     {
       "id": 2,
