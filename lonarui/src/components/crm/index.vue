@@ -5,7 +5,8 @@
 </style>
 <template>
   <div>
-    <input type="text">
+    <input type="text" v-model="obj.a">
+    <p>{{ obj.a }}</p>
     <router-link to="./listDetails">用户列表</router-link>
  <!-- <div id="myChart" :style="{width: '300px', height: '300px'}"></div> -->
 <keep-alive include="op">
@@ -23,6 +24,9 @@ export default {
   },
   data() {
     return {
+      obj:{
+        a:'2'
+      },
       transitionName: "fade",
     };
   },
@@ -50,10 +54,18 @@ export default {
 // })
     // }
   },
+  watch: {
+'obj.a': {
+  handler (val) {
+   val == '2' ? console.log(0) : ''
+  },
+  // immediate: true,
+}
+  },
   mounted() {
-    this.$http.get('https://api.data.caasdata.com/index').then(res =>{
-      console.log(res.data);
-    })
+  //  this.obj = {
+    // a: '456'
+  // }
     // this.drawLine();//调用echarts
   },
 //  beforeRouteEnter (to, from, next) {

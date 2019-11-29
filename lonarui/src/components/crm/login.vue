@@ -51,11 +51,10 @@
     input::-webkit-input-placeholder {
       color: #c8cace;
     }
-   
   }
   label.clo_red {
-        border-color:red;
-    }
+    border-color: red;
+  }
   button {
     .w-h(440, 70);
     background: #ccc;
@@ -70,7 +69,7 @@
     }
   }
   button.skyblue {
-      background: skyblue;
+    background: skyblue;
   }
   .auth_code {
     input {
@@ -81,10 +80,13 @@
     }
   }
 }
+.redTip input {
+  color: red;
+}
 </style>
 <template>
   <div id="login">
-    <div class="form">
+    <div class="form" ref="form">
       <form>
         <div>
           <h4>lonarui商城系统管理</h4>
@@ -94,12 +96,11 @@
                 <img src="../.././assets/image/login-1.png" alt />
               </span>
               <input
-                  type="text"
-                  name="name"
-                  placeholder="请输入账户名"
-                  :model="formLabelAlign.name"
-                  @keyup="name = name.replace(/\s+/g, '')"
-                  maxlength="6"
+                type="text"
+                name="name"
+                :placeholder="tips.nameTip"
+                v-model="form.name"
+                maxlength="6"
               />
             </label>
           </div>
@@ -111,9 +112,8 @@
               <input
                 type="text"
                 name="password"
-                placeholder="请输入密码"
-                v-model="formLabelAlign.password"
-                @keyup="password = password.replace(/\s+/g,'')"
+                :placeholder="tips.passTip"
+                v-model="form.password"
               />
             </label>
           </div>
@@ -122,9 +122,8 @@
               <input
                 type="text"
                 name="authCode"
-                placeholder="输入验证码"
-                v-model="formLabelAlign.authCode"
-                @keyup="authCode = authCode.replace(/\s+/g,'')"
+                :placeholder="tips.authCodeTip"
+                v-model="form.authCode"
               />
               <span>
                 <img src="../.././assets/image/login-3.png" alt />
@@ -135,65 +134,144 @@
         </div>
       </form>
     </div>
+    <p>{{ form.name }}eeeeeee</p>
   </div>
 </template>
-
 <script>
+import {mapState,mapMutations,mapActions,mapGetters} from 'vuex';
 export default {
-  name: "login",
   data() {
     return {
-    formLabelAlign: {
+// 绑定的表单提示语
+      tips: {
+        nameTip: "请输入账户名",
+        passTip: "请输入密码",
+        authCodeTip: "请输入验证码"
+        },
+// 绑定的表单数据
+      form: {
         name: "", //姓名
         password: "", //密码
-        authCode: "", //验证码
+        authCode: "" //验证码
+        }
+    };
+  },
+  watch: {
+    form: {
+      handler() {}
     }
+  },
+  methods: {
+    ...mapMutations(['setToken']),
+// 登录判断
+    loginHandler() {
+      // console.log( this.setToken());
+      let _this = this;
+      let nptDates= this.form;
+          nptDates.name != "" &&
+          nptDates.password != "" &&
+          nptDates.authCode != "" ?
+          loginReg()  :
+        new (function() {
+            nptB(nptDates.name, _this.$refs.nameId);
+            nptB(nptDates.password, _this.$refs.passwordId);
+            nptB(nptDates.authCode, _this.$refs.authCodeId);
+            function nptB(x, y) {
+             x === "" ? y.style = "border-color:red" : 'y.style = "border-color:#eceff0"'
+            }
+          });
+        function loginReg () {
+//  发送数据，携带token,根据接口获取token
+              _this.$http.post(
+               'http://www.zg.com',
+               {
+                 name: nptDates.name,
+                 password: nptDates.password,
+                 authCode: nptDates.authCode
+               }).then(res => {
+// 判断验证码是否正确
+                     nptDates.authCode != res.authCode ?
+                     (
+                       _this.$refs.authCodeId.classList.add('redTip'),
+                       nptDates.authCode = "验证码有误",
+                       new function () {
+                         _this.$eventUntil.addEvent(_this.$refs.authCodeId,'click',function () {
+                           this.classList.remove('redTip');
+                           nptDates.authCode = '';
+                         })
+                       }
+                     ) : String;
+  // 验证成功
+                   if(res.success === true) {
+                        _this.setToken({token: res.token});    //store中的为token赋值
+                      console.log(_this.$store.state.loginModlue.token);
+                      // this.$router.push('/managerHome');
+                   }
+               }).catch(err => {
+                 alert(err);
+           })
+        }
     }
   },
   watch: {
-      // formLabelAlign: {
-      //   handler(val) {
-      //     val.name != ''  && val.password != '' && val.authCode != '' ? 
-      //     this.$refs.login_el.className = 'skyblue' : 
-      //     this.$refs.login_el.className = '';
-      //     borderNone(_this.$refs.nameId);
-      //     borderNone(_this.$refs.passwordId); 
-      //     borderNone(_this.$refs.authCodeId);
-      //     function borderNone () {
-      //         el.style = 'border-color:#eceff0'
-      //     }
-      //   },
-      //   deep: true
-      // }
-  },
-  methods: {
-    loginHandler() {
-      let _this = this;
-      this.$http.get("http://www.zg.com").then(res => {
-          let values = res.login;
-          values.map((val, index) => {
-            val.name === this.formLabelAlign.name &&
-            val.password === this.formLabelAlign.password &&
-            val.authCode === this.formLabelAlign.authCode
-              ? alert(0)
-              : new (function() {
-                  verifys(_this.formLabelAlign.name, val.name, _this.$refs.nameId)
-                   verifys(_this.formLabelAlign.password, val.password, _this.$refs.passwordId)
-                    verifys(_this.formLabelAlign.authCode, val.authCode, _this.$refs.authCodeId)
-                 
-                  function verifys(modelNpt, dataMsg, el) {
-                     dataMsg != modelNpt ?
-                     (el.className = 'clo_red') :
-                     (el.style = 'border-color:#eceff0')
-                  }
-
-                })
-          });
-        }).catch(res => {
-          console.log(res);
-        });
+    form: {
+      handler(val) {
+        val.name != "" && val.password != "" && val.authCode != ""
+          ? this.$refs.login_el.classList.add("skyblue")
+          : this.$refs.login_el.classList.remove("skyblue");
+      },
+      // immediate: true,//监听初始表单value值
+      deep: true //深度监听表单value值
     }
   },
-  mounted() {}
-}
+  mounted() {
+   
+    let _this = this;
+    let eventHadler = this.$eventUntil; //调用全局事件器函数
+    let npt_el = this.$refs.form.getElementsByTagName("input"); //表单元素
+    let npt_data = this.form; //绑定的各表单数据
+    let nptTip = _this.tips; //绑定的各表单提示语
+    this.$nextTick(function() {
+      for (let x in npt_data) {
+        eventHadler.addEvent(npt_el[x], "keyup", acg); //输入去除空格
+        eventHadler.addEvent(npt_el[x], "click", removeTip); //点击取消placeholder提示
+        eventHadler.addEvent(npt_el[x], "mouseleave", addTip); //点击取消placeholder提示
+        eventHadler.addEvent(npt_el[x], "blur", blurTip); //失去焦点提示
+        function acg() {
+          npt_data[x] = npt_data[x].replace(/\s+/g, "");
+          this.parentNode.style.borderColor = "#eceff0";
+        }
+        function removeTip() {
+          this.placeholder = "";
+        }
+        function addTip() {
+          let EL = this;
+          tipHandler("name", nptTip.nameTip);
+          tipHandler("password", nptTip.passTip);
+          tipHandler("authCode", nptTip.authCodeTip);
+          function tipHandler(m, z) {
+            switch (x) {
+              case (EL.name = m):
+                EL.placeholder = z;
+            }
+          }
+        }
+        function blurTip() {
+          let EL = this;
+          tipHandler("name", nptTip.nameTip);
+          tipHandler("password", nptTip.passTip);
+          tipHandler("authCode", nptTip.authCodeTip);
+          function tipHandler(m, z) {
+            switch (x) {
+              case (EL.name = m):
+                EL.value === ""
+                  ? (EL.parentNode.style.borderColor = "red")
+                  : (EL.parentNode.style.borderColor = "#eceff0");
+            }
+          }
+        }
+      }
+    });
+  }
+};
 </script>

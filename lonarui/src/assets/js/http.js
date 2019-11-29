@@ -32,6 +32,19 @@ export default {
       withCredentials: true,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        
+      }
+    })
+  },
+  post1(url, data,token) {
+    return axios({
+      method: 'post',
+      url: url,
+      data: data,
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'access-token': token
       }
     })
   },

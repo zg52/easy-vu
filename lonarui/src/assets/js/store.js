@@ -42,28 +42,48 @@ const modlue2 = {
         number1: 1
     },
     mutations: {
-        add1 (state) {
+        add1(state) {
             state.number1++
         }
     },
     actions: {
-        add1Actions ({commit}) {
+        add1Actions({ commit }) {
             commit('add1')
         }
     }
 }
-
 //new
 const modlue3 = {
-	state: {
+    state: {
         URL: 'http://www.xuefu.com/byxf/data/image/',
         requestUrl: 'http://www.zg.com',//总数据接口
-	} 
+    }
+}
+const loginModlue = {
+    state: {
+        token: localStorage.getItem('token') ?
+               localStorage.getItem('token') : ''
+    },
+    mutations: {
+        setToken(state, token) { //{token: res.token}
+            state.token = token;
+            localStorage.setItem("token", token.token);//存储token
+        },
+        delToken(state) {
+            state.token = '';
+            localStorage.removeItem("token");    //删除token
+        }
+    },
+    actions: {
+    },
+    getters: {
+    }
 }
 export default new Vuex.Store({
     modules: {
         first: modlue1,
         second: modlue2,
-		third: modlue3
+        third: modlue3,
+        loginModlue: loginModlue
     }
 });

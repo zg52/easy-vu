@@ -51,7 +51,11 @@ export default {
     ...mapMutations(['add1']),
     ...mapActions(['add1Actions']),
     ...mapMutations(["add", "reduce"]),
-    ...mapActions(["addAction", "reduceAction"]) //异步调用
-  }
+    ...mapActions(["addAction", "reduceAction"]), //异步调用
+    ...mapMutations(['setToken'])
+  },
+  mounted() {
+console.log(this.setToken())
+  },
 };
 </script>
