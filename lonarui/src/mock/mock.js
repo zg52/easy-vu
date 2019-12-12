@@ -2,7 +2,7 @@
 var Mock = require('mockjs')
 var datas = Mock.mock('http://www.zg.com', {
   "msg": "登录成功",
-  "token": "1212-32-34-434398470000000000000000002433243403",
+  "token": "1212-32-34-434393232323",
   "success": true,
   "statusCode": 200,
   "error": 500,
@@ -13,7 +13,7 @@ var datas = Mock.mock('http://www.zg.com', {
   "login": [
     {
       "id": 1,
-      "name": "123",
+      "name": "1",
       "password": "4321",
       "mobile": '15652970369',
     },

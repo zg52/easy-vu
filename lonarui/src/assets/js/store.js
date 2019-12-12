@@ -57,7 +57,7 @@ const modlue3 = {
     state: {
         URL: 'http://www.xuefu.com/byxf/data/image/',
         requestUrl: 'http://www.zg.com',//总数据接口
-    }
+    }        
 }
 const loginModlue = {
     state: {

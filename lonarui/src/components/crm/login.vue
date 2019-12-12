@@ -93,7 +93,7 @@
           <div>
             <label for="name" ref="nameId">
               <span>
-                <img src="../.././assets/image/login-1.png" alt />
+                <img src="../.././assets/image/login-1.png"/>
               </span>
               <input
                 type="text"
@@ -107,7 +107,7 @@
           <div>
             <label for="password" ref="passwordId">
               <span>
-                <img src="../.././assets/image/login-2.png" alt />
+                <img src="../.././assets/image/login-2.png"/>
               </span>
               <input
                 type="text"
@@ -126,7 +126,7 @@
                 v-model="form.authCode"
               />
               <span>
-                <img src="../.././assets/image/login-3.png" alt />
+                <img src="../.././assets/image/login-3.png"/>
               </span>
             </label>
           </div>
@@ -134,12 +134,12 @@
         </div>
       </form>
     </div>
-    <p>{{ form.name }}eeeeeee</p>
   </div>
 </template>
 <script>
 import {mapState,mapMutations,mapActions,mapGetters} from 'vuex';
 export default {
+  name:'login',
   data() {
     return {
 // 绑定的表单提示语
@@ -163,11 +163,12 @@ export default {
   },
   methods: {
     ...mapMutations(['setToken']),
+ 
 // 登录判断
     loginHandler() {
       // console.log( this.setToken());
       let _this = this;
-      let nptDates= this.form;
+      let nptDates = this.form;
           nptDates.name != "" &&
           nptDates.password != "" &&
           nptDates.authCode != "" ?
@@ -204,8 +205,7 @@ export default {
   // 验证成功
                    if(res.success === true) {
                         _this.setToken({token: res.token});    //store中的为token赋值
-                      console.log(_this.$store.state.loginModlue.token);
-                      // this.$router.push('/managerHome');
+                         _this.$router.push('/index');
                    }
                }).catch(err => {
                  alert(err);
@@ -232,7 +232,7 @@ export default {
     let npt_data = this.form; //绑定的各表单数据
     let nptTip = _this.tips; //绑定的各表单提示语
     this.$nextTick(function() {
-      for (let x in npt_data) {
+      for (let x in npt_data) {  //遍历三项表单做事件操作
         eventHadler.addEvent(npt_el[x], "keyup", acg); //输入去除空格
         eventHadler.addEvent(npt_el[x], "click", removeTip); //点击取消placeholder提示
         eventHadler.addEvent(npt_el[x], "mouseleave", addTip); //点击取消placeholder提示
@@ -271,7 +271,7 @@ export default {
           }
         }
       }
-    });
+    }) 
   }
-};
+} 
 </script>
