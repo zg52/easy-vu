@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="loginStatus">
     <!-- <crm_head></crm_head>
     <crm_base></crm_base>-->
     <!-- 不需要刷新的路由配置里面配置 -->
@@ -35,8 +35,14 @@ export default {
   data() {
     return {
       transitionName: "fade",
-      tokeVerify: this.$store.state.loginModlue.token
-    };
+      tokeVerify: this.$store.state.loginModlue.token, //从store中得到token
+// 超时退出
+      timeoutExit: {
+        endTime: new Date().getTime(),//最后一次鼠标操作时间
+        startTime: new Date().getTime(),//当前鼠标操作时间
+        curTime: 10 * 60 * 1000 
+      }
+    } 
   },
   components: {
     crm_head,
@@ -48,7 +54,7 @@ export default {
     afterEnter(el) {
       // console.log("动画进入之后");
       // el.style.background = "rgb(252, 252, 252)";
-    }
+    },
     //    beforeEnter(el){
     //       console.log('动画enter之前');
     //   },
@@ -65,89 +71,37 @@ export default {
     //       console.log('动画leave之后');
     //       el.style.backgroun
     // }
+
+// 超时自动退出
+    loginStatus () {//点击，每次改变鼠标最后点击的系统时间
+     this.timeoutExit.endTime = new Date().getTime();
+    }
   },
   mounted() { 
-    let _this = this;
+let _this = this;
+
+// 全局调用wow.js
+new WOW().init();
     this.$nextTick(function() {
-      // 判断登录状态
-      //  console.log(this.tokeVerify);
+// 判断登录状态
       if (
         this.tokeVerify !== null &&
         this.tokeVerify !== undefined &&
         this.tokeVerify !== ""
-      ) {
-        this.$route.path === "/" ? this.$router.push("/index") : String;
+      ) this.$route.path === "/" ? this.$router.push("/index") : String;
 
 // 超时自动退出
-      //   setTimeout(() => {
-      //     _this.delToken();
-      //   },5000);
-      // }
-
-var timerIdle=0;   //空闲时间
-var timerBusy=0;   //倒计时开始
-var timerIdle1=5;  //系统参数定义超时时间
-var timerBusy1=14; //退出时间
-
-
-function timerTimeout(){
-    timerIdle++;
-    if (timerIdle>timerIdle1){
-      if (timerBusy==0){
-            timerBusy=timerBusy1+1;
-      //view timerUI
-      document.getElementById("timerUI").style.display="inline";   
-    }
-    timerBusy--;
-    //view timerBusy
-    document.getElementById("_timerBusy").innerHTML=timerBusy;
-    if (timerBusy<=0){
-        timerExit();
-        return;
-    }
-   }else{
-      timerBusy=0;
-   }
-   window.setTimeout("timerTimeout()",1000);
-}
-
-  function timerUser(){
-    //让div消失
-    timerIdle=0;
-    document.getElementById("timerUI").style.display="none";
-  }
-
-  function timerExit()
-  {
-    //超时处理.这里可以写自己需要执行的方法...
-    document.getElementById("_timerBusy").innerHTML="Timeout";
-  }
-  window.setTimeout("timerTimeout()",1000);
-  function mouseMove(ev){
-    ev= ev || window.event;
-    timerUser();
-    var mousePos = mouseCoords(ev);
-  }
-
-
-function mouseCoords(ev){
-  if(ev.pageX || ev.pageY){
-    return {x:ev.pageX, y:ev.pageY};
-  }
-  return {
-      x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-      y:ev.clientY + document.body.scrollTop - document.body.clientTop
-  };
-}
-
-  document.onmousemove = mouseMove;
-  document.onkeydown = mouseMove;
-
-
+ let timesTip = setInterval(() => {
+       _this.timeoutExit.startTime = new Date().getTime();
+       if(_this.timeoutExit.startTime - _this.timeoutExit.endTime  > _this.timeoutExit.curTime) { //当前时间 - 鼠标操作某一刻的系统时间
+         this.$store.state.loginModlue.token != '' ? (
+           _this.$message({ message: '为保证您的信息安全，登录已超时，请重新登录！', type: 'warning' }),
+            clearInterval(timesTip), 
+           _this.delToken()
+         ) : String;
+       } 
+     },1000);
 // -------------------------------------------------------------------------------------------------------
-      // console.log(this.$route);
-      new WOW().init();
-
       //  捕获异常
       window.onerror = function(message, source, lineno, colno, error) {
         console.log("捕获到异常：", { message, source, lineno, colno, error });
@@ -175,9 +129,7 @@ function mouseCoords(ev){
       // } else {
       //   console.log(to.path)
       // }
-    }
-  }
-};
+    } } }
 </script>
 <style>
 /* 全局设置路由切换动画 */

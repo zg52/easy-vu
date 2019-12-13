@@ -225,7 +225,6 @@ export default {
     }
   },
   mounted() {
-   
     let _this = this;
     let eventHadler = this.$eventUntil; //调用全局事件器函数
     let npt_el = this.$refs.form.getElementsByTagName("input"); //表单元素
