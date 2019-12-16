@@ -25,7 +25,7 @@
       <li v-for="(xialaCont,index) of xiala.xialaConts">{{ xialaCont.txt }}</li>
     </div>
   </li>
-</ul>
+</ul>  
   </div>
 </template>
 <script>

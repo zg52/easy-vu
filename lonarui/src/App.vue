@@ -24,7 +24,10 @@
       <!-- 需要刷新的路由配置里面配置 -->
       <router-view v-if="!$route.meta.keepAlive"></router-view>
     </transition>
-  </div>
+ <el-button type="text" @click="open">点击打开 Message Box</el-button>
+    
+  </div> 
+
 </template>
 <script>
 import crm_head from "./components/crm/public/crm_head.vue";
@@ -40,7 +43,7 @@ export default {
       timeoutExit: {
         endTime: new Date().getTime(),//最后一次鼠标操作时间
         startTime: new Date().getTime(),//当前鼠标操作时间
-        curTime: 10 * 60 * 1000 
+        curTime:  1 
       }
     } 
   },
@@ -49,6 +52,7 @@ export default {
     crm_base
   },
   methods: {
+    
     ...mapMutations(['setToken']),
     ...mapMutations(['delToken']),
     afterEnter(el) {
@@ -75,11 +79,22 @@ export default {
 // 超时自动退出
     loginStatus () {//点击，每次改变鼠标最后点击的系统时间
      this.timeoutExit.endTime = new Date().getTime();
-    }
+    },
+// 超时自动退出弹框提示
+     open() {
+        this.$alert('这是一段内容', '标题名称', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+      }
   },
   mounted() { 
 let _this = this;
-
 // 全局调用wow.js
 new WOW().init();
     this.$nextTick(function() {
