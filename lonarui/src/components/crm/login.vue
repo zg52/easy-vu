@@ -1,7 +1,7 @@
 <style lang="less" scoped>
 @import "../.././assets/css/public.less";
 #login {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   background: url("../.././assets/image/login.jpg") top center no-repeat;
 }

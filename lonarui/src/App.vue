@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="loginStatus">
+ <div id="app" @click="loginStatus">
     <!-- <crm_head></crm_head>
     <crm_base></crm_base>-->
     <!-- 不需要刷新的路由配置里面配置 -->
@@ -11,7 +11,7 @@
       mode="out-in"
     >
       <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
+     <router-view v-if="$route.meta.keepAlive"></router-view>
       </keep-alive>
     </transition>
     <transition
@@ -24,37 +24,51 @@
       <!-- 需要刷新的路由配置里面配置 -->
       <router-view v-if="!$route.meta.keepAlive"></router-view>
     </transition>
- <el-button type="text" @click="open">点击打开 Message Box</el-button>
-    
-  </div> 
-
+    <!-- 全局对话框(带确认和取消) -->
+    <toolTip :tipMsg="propsToMsg.tipMsg" @parentEve="toLogin" v-show="propsToMsg.goLoginStatus"></toolTip>
+  </div>
 </template>
 <script>
 import crm_head from "./components/crm/public/crm_head.vue";
 import crm_base from "./components/crm/public/crm_base.vue";
 import { WOW } from "wowjs"; //配合animate.css 使用
 import { mapState, mapMutations, mapActions, mapGetters } from "vuex";
+import toolTip from "./components/crm/public/toolTip.vue";
 export default {
-  data() {
-    return {
-      transitionName: "fade",
-      tokeVerify: this.$store.state.loginModlue.token, //从store中得到token
-// 超时退出
-      timeoutExit: {
-        endTime: new Date().getTime(),//最后一次鼠标操作时间
-        startTime: new Date().getTime(),//当前鼠标操作时间
-        curTime:  1 
-      }
-    } 
-  },
   components: {
     crm_head,
-    crm_base
+    crm_base,
+    toolTip //带选择按钮的对话框
+  },
+  data() {
+    return {
+      propsToMsg: {
+        tipMsg: "登录已过期，请重新登录",
+        goLoginStatus: false
+      },
+      transitionName: "fade",
+      tokeVerify: this.$store.state.loginModlue.token,
+
+// 超时退出
+      timeoutExit: {
+        endTime: new Date().getTime(), //最后一次鼠标操作时间
+        startTime: new Date().getTime(), //当前鼠标操作时间
+        curTime: 5000
+      },
+      
+    func: {
+      ale () {
+        alert(0)
+      },
+      rt () {
+        alert(9)
+      }
+    }
+    }
   },
   methods: {
-    
-    ...mapMutations(['setToken']),
-    ...mapMutations(['delToken']),
+    ...mapMutations(["setToken"]),
+    ...mapMutations(["delToken"]),
     afterEnter(el) {
       // console.log("动画进入之后");
       // el.style.background = "rgb(252, 252, 252)";
@@ -76,75 +90,56 @@ export default {
     //       el.style.backgroun
     // }
 
-// 超时自动退出
-    loginStatus () {//点击，每次改变鼠标最后点击的系统时间
-     this.timeoutExit.endTime = new Date().getTime();
+    // 超时自动退出
+    loginStatus() {
+      //点击，每次改变鼠标最后点击的系统时间
+      this.timeoutExit.endTime = new Date().getTime();
+      this.propsToMsg.goLoginStatus = false;
     },
-// 超时自动退出弹框提示
-     open() {
-        this.$alert('这是一段内容', '标题名称', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action: ${ action }`
-            });
-          }
-        });
-      }
+ // 超时自动退出弹框提示
+    toLogin(msg) {
+       this.$router.push({ path: "/" });
+       this.$router.go(0) //刷新页面，防止超时退出失效
+        },
   },
-  mounted() { 
-let _this = this;
-// 全局调用wow.js
-new WOW().init();
+  mounted() {
+    let _this = this;
+    new WOW().init(); // 全局调用wow.js
+
     this.$nextTick(function() {
-// 判断登录状态
-      if (
-        this.tokeVerify !== null &&
-        this.tokeVerify !== undefined &&
-        this.tokeVerify !== ""
-      ) this.$route.path === "/" ? this.$router.push("/index") : String;
+  // 防止获取不到token
+      setInterval(() => { _this.tokeVerify = _this.$store.state.loginModlue.token; }, 0);
 
 // 超时自动退出
- let timesTip = setInterval(() => {
-       _this.timeoutExit.startTime = new Date().getTime();
-       if(_this.timeoutExit.startTime - _this.timeoutExit.endTime  > _this.timeoutExit.curTime) { //当前时间 - 鼠标操作某一刻的系统时间
-         this.$store.state.loginModlue.token != '' ? (
-           _this.$message({ message: '为保证您的信息安全，登录已超时，请重新登录！', type: 'warning' }),
-            clearInterval(timesTip), 
-           _this.delToken()
-         ) : String;
-       } 
-     },1000);
-// -------------------------------------------------------------------------------------------------------
-      //  捕获异常
-      window.onerror = function(message, source, lineno, colno, error) {
-        console.log("捕获到异常：", { message, source, lineno, colno, error });
-      };
-      window.addEventListener(
-        "error",
-        error => {
-          console.log("捕获到异常：", error);
-        },
-        true
-      );
+      let timesTip = setInterval(() => {
+        _this.timeoutExit.startTime = new Date().getTime();
+        if ( _this.timeoutExit.startTime - _this.timeoutExit.endTime > _this.timeoutExit.curTime ) {//当前时间 - 鼠标操作某一刻的系统时间
+          _this.tokeVerify != ""
+            ? (_this.propsToMsg.goLoginStatus = true,
+              clearInterval(timesTip),
+              _this.delToken()    
+              )
+            : String;
+        }
+      }, 1000);
+ 
     });
   },
   watch: {
+  //监听登录路径，若有token，则不显示登录页
     $route: function(to, from) {
-      // if (to.path == "/listDetails") {
-      //   //如果跳到登录页，就启用slide-left类名的动画
-      //   this.transitionName = "slide-fade";
-      // }
-      // if(to.path == '/') {
-      //   console.log(909090);
-      //     console.log(to.name);
-      //   window.localStorage.getItem('token') !== null ?
-      //   this.$router.push('/index') : String;
-      // } else {
-      //   console.log(to.path)
-      // }
-    } } }
+      if (to.path === "/") {
+        if (
+          this.tokeVerify != null &&
+          this.tokeVerify != undefined &&
+          this.tokeVerify != ""
+        ) {
+          this.$router.push({ path: "/index" });
+        }
+      }
+    }
+  }
+};
 </script>
 <style>
 /* 全局设置路由切换动画 */

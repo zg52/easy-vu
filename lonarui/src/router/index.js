@@ -81,7 +81,8 @@ export default new Router({
     {
       path: '/',
       name: 'login',
-      component: login
+      component: resolve => require(['.././components/crm/login.vue'],resolve),
+
     },
     {
       path: '/listDetails',
