@@ -15,7 +15,6 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/iconfont.css'   //全局icon
 import './assets/css/reset.css'   //全局reset
-// import './assets/css/public.less' //全局less
 import './assets/css/animate.css'  
 
 
@@ -23,14 +22,15 @@ import './assets/css/animate.css'
 // import 'echarts/lib/chart/line'
 // Vue.component('chart', ECharts)
 // 引入echarts
-import echarts from 'echarts'
+// import echarts from 'echarts'
 
-Vue.prototype.$echarts = echarts 
-
-
+// Vue.prototype.$echarts = echarts 
 
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false;  //阻止启动产生的消息
+Vue.config.silent = true  //取消 Vue 所有的日志与警告。
+
+
 Vue.config.errorHandler = (err, vm, info) => {
   console.error('通过vue errorHandler捕获的错误');
   console.error(err);
